@@ -1,311 +1,717 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>People Diagnostic Tool</title>
-  <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    body { font-family: 'Georgia', serif; background: #0a0a0a; color: #ffffff; min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 20px; }
-    .container { max-width: 720px; width: 100%; }
-    .screen { display: none; }
-    .screen.active { display: block; }
-    .welcome-label { font-family: 'Arial', sans-serif; font-size: 11px; letter-spacing: 3px; color: #2E8B8B; text-transform: uppercase; margin-bottom: 24px; }
-    .welcome-title { font-size: clamp(22px, 4vw, 32px); font-weight: normal; line-height: 1.3; color: #ffffff; margin-bottom: 32px; letter-spacing: 1px; }
-    .welcome-body { font-family: 'Arial', sans-serif; font-size: 15px; line-height: 1.9; color: #aaaaaa; margin-bottom: 48px; }
-    .welcome-body p { margin-bottom: 16px; }
-    .btn-start { font-family: 'Arial', sans-serif; font-size: 12px; letter-spacing: 2px; text-transform: uppercase; background: transparent; color: #2E8B8B; border: 1px solid #2E8B8B; padding: 16px 40px; cursor: pointer; transition: all 0.3s ease; margin-bottom: 40px; display: block; }
-    .btn-start:hover { background: #2E8B8B; color: #0a0a0a; }
-    .welcome-sign { font-family: 'Arial', sans-serif; font-size: 12px; color: #444444; line-height: 1.8; }
-    .welcome-sign strong { color: #666666; }
-    .progress-bar { width: 100%; height: 1px; background: #1a1a1a; margin-bottom: 60px; }
-    .progress-fill { height: 100%; background: #2E8B8B; transition: width 0.5s ease; }
-    .question-count { font-family: 'Arial', sans-serif; font-size: 11px; letter-spacing: 3px; color: #333333; text-transform: uppercase; margin-bottom: 40px; }
-    .question-text { font-size: clamp(18px, 3vw, 24px); font-weight: normal; line-height: 1.5; color: #ffffff; margin-bottom: 48px; }
-    .options { display: flex; flex-direction: column; gap: 10px; }
-    .option { font-family: 'Arial', sans-serif; font-size: 14px; line-height: 1.6; color: #777777; background: transparent; border: 1px solid #181818; padding: 16px 22px; cursor: pointer; text-align: left; transition: all 0.2s ease; display: flex; align-items: flex-start; gap: 16px; }
-    .option:hover { border-color: #2E8B8B; color: #ffffff; background: #0a1a1a; }
-    .option.selected { border-color: #2E8B8B; color: #ffffff; background: #0a1a1a; }
-    .option-letter { font-family: 'Arial', sans-serif; font-size: 10px; letter-spacing: 1px; color: #2E8B8B; min-width: 14px; margin-top: 3px; text-transform: uppercase; }
-    .context-options { display: flex; flex-direction: column; gap: 10px; margin-top: 48px; }
-    .context-btn { font-family: 'Arial', sans-serif; font-size: 14px; color: #777777; background: transparent; border: 1px solid #181818; padding: 16px 22px; cursor: pointer; text-align: left; transition: all 0.2s ease; }
-    .context-btn:hover { border-color: #2E8B8B; color: #ffffff; background: #0a1a1a; }
-    .result-label { font-family: 'Arial', sans-serif; font-size: 10px; letter-spacing: 3px; color: #2E8B8B; text-transform: uppercase; margin-bottom: 12px; }
-    .result-state { font-size: clamp(28px, 5vw, 44px); font-weight: normal; line-height: 1.2; color: #ffffff; margin-bottom: 36px; }
-    .result-divider { width: 32px; height: 1px; background: #2E8B8B; margin-bottom: 36px; }
-    .result-description { font-family: 'Arial', sans-serif; font-size: 15px; line-height: 1.9; color: #aaaaaa; margin-bottom: 40px; }
-    .result-footer { font-family: 'Arial', sans-serif; font-size: 12px; line-height: 1.7; color: #444444; margin-bottom: 40px; font-style: italic; }
-    .btn-restart { font-family: 'Arial', sans-serif; font-size: 10px; letter-spacing: 2px; text-transform: uppercase; background: transparent; color: #333333; border: 1px solid #1a1a1a; padding: 12px 28px; cursor: pointer; transition: all 0.3s ease; margin-bottom: 48px; }
-    .btn-restart:hover { color: #2E8B8B; border-color: #2E8B8B; }
-    .brand { font-family: 'Arial', sans-serif; font-size: 10px; letter-spacing: 2px; color: #222222; text-transform: uppercase; }
-    .context-result-title { font-size: clamp(22px, 4vw, 32px); font-weight: normal; line-height: 1.3; color: #ffffff; margin-bottom: 28px; }
-    .context-result-body { font-family: 'Arial', sans-serif; font-size: 15px; line-height: 1.9; color: #aaaaaa; margin-bottom: 40px; }
-    .context-result-body p { margin-bottom: 16px; }
-    .fade-in { animation: fadeIn 0.4s ease forwards; }
-    @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
-    @media (max-width: 480px) { body { padding: 40px 20px; align-items: flex-start; } .option { padding: 14px 18px; font-size: 13px; } }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Noer (Misbah) Hameed — People Strategist, APAC</title>
+<meta name="description" content="Partnering with leaders to close the gap between what they hear and what their people are actually saying.">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --dark:       #0D2B1F;
+  --dark-mid:   #0F2318;
+  --gold:       #D4A843;
+  --gold-light: #E2C070;
+  --sand:       #F0E9D6;
+  --muted:      #6B9478;
+  --text:       #E8E0CF;
+  --border:     rgba(212,168,67,0.15);
+  --border-dim: rgba(212,168,67,0.08);
+  --pad: 1.5rem;
+}
+
+@media(min-width:768px) { :root { --pad: 4rem; } }
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'DM Sans', sans-serif;
+  background: var(--dark);
+  color: var(--text);
+  font-size: 15px;
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+}
+
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 0 var(--pad);
+  height: 62px;
+  background: rgba(13,43,31,0.97);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border-dim);
+}
+
+.nav-logo {
+  font-family: 'Playfair Display', serif;
+  font-size: 0.9rem;
+  color: var(--gold-light);
+  letter-spacing: 0.03em;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.nav-links {
+  list-style: none;
+  display: flex;
+  gap: 1.75rem;
+  align-items: center;
+}
+
+.nav-links a {
+  text-decoration: none;
+  font-size: 0.68rem;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+  color: var(--muted);
+  transition: color 0.2s;
+  white-space: nowrap;
+}
+
+.nav-links a:hover { color: var(--gold-light); }
+.nav-links li.hide-mobile { display: none; }
+@media(min-width:640px) { .nav-links li.hide-mobile { display: block; } }
+
+.nav-cta {
+  padding: 0.45rem 1.1rem !important;
+  border: 1px solid var(--border) !important;
+  color: var(--gold) !important;
+}
+
+.nav-cta:hover {
+  background: var(--gold) !important;
+  color: var(--dark) !important;
+}
+
+.hero {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 100px var(--pad) 60px;
+  border-bottom: 1px solid var(--border-dim);
+}
+
+.hero-tag {
+  font-size: 0.65rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 1.5rem;
+}
+
+.hero h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(1.75rem, 5.5vw, 4.2rem);
+  font-weight: 700;
+  line-height: 1.15;
+  color: var(--sand);
+  max-width: 700px;
+  margin-bottom: 1.25rem;
+}
+
+.hero h1 em { font-style: italic; color: var(--gold-light); }
+
+.hero-sub {
+  font-size: 0.9rem;
+  color: var(--muted);
+  max-width: 480px;
+  font-weight: 300;
+  line-height: 1.75;
+  margin-bottom: 2.25rem;
+}
+
+.hero-btn {
+  display: inline-block;
+  padding: 0.85rem 2rem;
+  background: var(--gold);
+  color: var(--dark);
+  text-decoration: none;
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  transition: background 0.25s, transform 0.2s;
+  align-self: flex-start;
+}
+
+.hero-btn:hover { background: var(--gold-light); transform: translateY(-2px); }
+
+.hero-markets {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 3.5rem;
+}
+
+.market {
+  font-size: 0.6rem;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+  color: var(--muted);
+  border: 1px solid rgba(212,168,67,0.18);
+  padding: 0.28rem 0.7rem;
+}
+
+.section {
+  padding: 4.5rem var(--pad);
+  border-bottom: 1px solid var(--border-dim);
+}
+
+.section-alt { background: var(--dark-mid); }
+
+.label {
+  font-size: 0.6rem;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 2rem;
+  display: block;
+}
+
+.about-wrap { max-width: 560px; }
+
+.about-lead {
+  font-family: 'Playfair Display', serif;
+  font-size: 1rem;
+  font-style: italic;
+  color: var(--sand);
+  line-height: 1.65;
+  margin-bottom: 1.25rem;
+}
+
+.about-body p {
+  font-size: 0.875rem;
+  color: var(--text);
+  font-weight: 300;
+  line-height: 1.8;
+  margin-bottom: 0.85rem;
+}
+
+.about-stats {
+  display: flex;
+  gap: 2rem;
+  margin-top: 2rem;
+  padding-top: 2rem;
+  border-top: 1px solid var(--border-dim);
+  flex-wrap: wrap;
+}
+
+.stat-num {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.75rem;
+  color: var(--gold);
+  line-height: 1;
+  margin-bottom: 0.25rem;
+}
+
+.stat-label {
+  font-size: 0.62rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.focus-grid { max-width: 640px; }
+
+.focus-item {
+  display: grid;
+  grid-template-columns: 2.25rem 1fr;
+  gap: 1rem;
+  padding: 1.75rem 0;
+  border-bottom: 1px solid var(--border-dim);
+}
+
+.focus-item:first-child { border-top: 1px solid var(--border-dim); }
+
+.focus-num {
+  font-family: 'Playfair Display', serif;
+  font-size: 0.75rem;
+  font-style: italic;
+  color: var(--gold);
+  padding-top: 0.15rem;
+}
+
+.focus-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 0.95rem;
+  color: var(--sand);
+  font-weight: 400;
+  margin-bottom: 0.4rem;
+  line-height: 1.4;
+}
+
+.focus-body {
+  font-size: 0.82rem;
+  color: var(--muted);
+  font-weight: 300;
+  line-height: 1.75;
+}
+
+.tools-intro {
+  font-size: 0.875rem;
+  color: var(--muted);
+  max-width: 500px;
+  font-weight: 300;
+  line-height: 1.8;
+  margin-bottom: 2.25rem;
+}
+
+.tools-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+  max-width: 900px;
+}
+
+@media(min-width:600px) { .tools-grid { grid-template-columns: repeat(2, 1fr); } }
+@media(min-width:960px) { .tools-grid { grid-template-columns: repeat(3, 1fr); } }
+
+.tool-card {
+  border: 1px solid var(--border);
+  padding: 1.5rem;
+  transition: border-color 0.25s;
+  display: flex;
+  flex-direction: column;
+}
+
+.tool-card:hover { border-color: rgba(212,168,67,0.4); }
+
+.tool-badge {
+  font-size: 0.58rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 0.75rem;
+}
+
+.tool-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 0.95rem;
+  color: var(--sand);
+  font-weight: 400;
+  margin-bottom: 0.5rem;
+  line-height: 1.35;
+}
+
+.tool-desc {
+  font-size: 0.8rem;
+  color: var(--muted);
+  font-weight: 300;
+  line-height: 1.75;
+  flex: 1;
+  margin-bottom: 1.25rem;
+}
+
+.tool-action {
+  font-size: 0.68rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--gold);
+  text-decoration: none;
+  transition: opacity 0.2s;
+}
+
+.tool-action:hover { opacity: 0.7; }
+
+.tool-soon {
+  font-size: 0.62rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--muted);
+  border: 1px solid rgba(255,255,255,0.1);
+  padding: 0.22rem 0.65rem;
+  display: inline-block;
+  align-self: flex-start;
+}
+
+.newsletter-wrap { max-width: 500px; }
+
+.newsletter-wrap h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.6rem;
+  color: var(--sand);
+  font-weight: 400;
+  line-height: 1.3;
+  margin-bottom: 0.85rem;
+}
+
+.newsletter-wrap p {
+  font-size: 0.875rem;
+  color: var(--muted);
+  font-weight: 300;
+  line-height: 1.8;
+  margin-bottom: 1.75rem;
+}
+
+.newsletter-note { font-size: 0.68rem; color: var(--muted); margin-top: 0.65rem; }
+
+.testimonial-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.25rem;
+  max-width: 820px;
+}
+
+@media(min-width:640px) { .testimonial-grid { grid-template-columns: repeat(2, 1fr); } }
+
+.testimonial-card {
+  border: 1px solid var(--border-dim);
+  padding: 1.75rem;
+}
+
+.testimonial-quote {
+  font-family: 'Playfair Display', serif;
+  font-size: 0.95rem;
+  font-style: italic;
+  color: var(--sand);
+  line-height: 1.8;
+  margin-bottom: 1.25rem;
+}
+
+.testimonial-person { display: flex; align-items: center; gap: 0.75rem; }
+
+.t-avatar {
+  width: 36px; height: 36px;
+  border-radius: 50%;
+  background: rgba(212,168,67,0.1);
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'Playfair Display', serif;
+  font-size: 0.75rem;
+  color: var(--gold);
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+.t-name { font-size: 0.82rem; color: var(--sand); font-weight: 500; }
+.t-role { font-size: 0.7rem; color: var(--muted); margin-top: 0.1rem; }
+
+.contact-wrap { text-align: center; max-width: 480px; margin: 0 auto; }
+
+.contact-wrap h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.8rem;
+  color: var(--sand);
+  font-weight: 400;
+  margin-bottom: 0.85rem;
+  line-height: 1.3;
+}
+
+.contact-wrap p {
+  font-size: 0.875rem;
+  color: var(--muted);
+  font-weight: 300;
+  line-height: 1.8;
+  margin-bottom: 2rem;
+}
+
+.contact-email {
+  font-family: 'Playfair Display', serif;
+  font-style: italic;
+  font-size: 1.1rem;
+  color: var(--gold-light);
+  text-decoration: none;
+  border-bottom: 1px solid rgba(226,192,112,0.3);
+  padding-bottom: 0.15rem;
+  transition: border-color 0.2s;
+}
+
+.contact-email:hover { border-color: var(--gold-light); }
+
+footer {
+  padding: 1.25rem var(--pad);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.68rem;
+  color: var(--muted);
+  border-top: 1px solid var(--border-dim);
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+footer a { color: var(--muted); text-decoration: none; transition: color 0.2s; }
+footer a:hover { color: var(--gold-light); }
+</style>
 </head>
 <body>
-<div class="container">
-  <div class="screen active" id="screen-welcome">
-    <div class="fade-in">
-      <div class="welcome-label">People Diagnostic Tool</div>
-      <h1 class="welcome-title">How are you doing at work?</h1>
-      <div class="welcome-body">
-        <p>This diagnostic is designed to help you identify your current engagement state at work and the recommended actions to address it.</p>
-        <p>Select the response that most accurately reflects your current experience. This is a reflective tool, not a clinical assessment. It is a structured starting point for a conversation.</p>
-        <p>Your responses are confidential. Time to complete: approximately five minutes.</p>
+
+<nav>
+  <a href="#home" class="nav-logo">Noer (Misbah) Hameed</a>
+  <ul class="nav-links">
+    <li class="hide-mobile"><a href="#about">About</a></li>
+    <li class="hide-mobile"><a href="#focus">Focus</a></li>
+    <li class="hide-mobile"><a href="#tools">Tools</a></li>
+    <li class="hide-mobile"><a href="#writing">Writing</a></li>
+    <li class="hide-mobile"><a href="#newsletter">Newsletter</a></li>
+    <li><a href="#contact" class="nav-cta">Work With Me</a></li>
+  </ul>
+</nav>
+
+<section class="hero" id="home">
+  <div class="hero-tag">Organisational Psychology · People Strategy · APAC</div>
+  <h1>I help leaders understand what their people are <em>actually saying</em> before it becomes a problem they cannot solve.</h1>
+  <p class="hero-sub">Specialising in disengagement, leadership behaviour, and hidden workplace dynamics across Singapore, Jakarta, Bangalore, Thailand, and the Philippines. Eight years. 350 people. Five culturally distinct markets.</p>
+  <div style="display:flex;gap:1rem;flex-wrap:wrap;margin-bottom:0;">
+    <a href="#contact" class="hero-btn">Work With Me</a>
+    <a href="#tools" class="hero-btn" style="background:transparent;border:1px solid rgba(212,168,67,0.4);color:var(--gold);">Get Free Tools</a>
+  </div>
+  <div class="hero-markets">
+    <span class="market">Singapore</span>
+    <span class="market">Jakarta</span>
+    <span class="market">Bangalore</span>
+    <span class="market">Thailand</span>
+    <span class="market">Philippines</span>
+  </div>
+  <div style="margin-top:1.5rem;">
+    <a href="https://www.linkedin.com/in/misbah-hameedpeoplepartner/" target="_blank" style="font-size:0.72rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted);text-decoration:none;" onmouseover="this.style.color='var(--gold-light)'" onmouseout="this.style.color='var(--muted)'">Follow on LinkedIn &#8599;</a>
+  </div>
+</section>
+
+<section class="section section-alt" id="about">
+  <div class="label">About</div>
+  <div class="about-wrap">
+    <div style="width:80px;height:80px;border-radius:50%;background:rgba(212,168,67,0.1);border:1px solid rgba(212,168,67,0.25);display:flex;align-items:center;justify-content:center;margin-bottom:1.5rem;">
+      <span style="font-family:'Playfair Display',serif;font-size:1.4rem;color:var(--gold);font-style:italic;">N</span>
+    </div>
+    <p class="about-lead">My five year old niece Maryam asks why until she truly understands. I am exactly the same way.</p>
+    <div class="about-body">
+      <p>I am Noer (Misbah) Hameed. I specialise in organisational psychology, disengagement patterns, and leadership behaviour across APAC. I work with leaders and HR professionals who sense something is wrong with their people but cannot pinpoint what.</p>
+      <p>My work spans manager enablement, retention strategy, and people diagnostics across five culturally distinct markets. I combine operational depth with behavioural insight to give leaders an accurate picture of what is actually happening inside their organisations.</p>
+    </div>
+    <div class="about-stats">
+      <div>
+        <div class="stat-num">8</div>
+        <div class="stat-label">Years in People Strategy</div>
       </div>
-      <button class="btn-start" onclick="startDiagnostic()">Begin</button>
-      <div class="welcome-sign">
-        <strong>Noer Hameed</strong><br>
-        People Architect
+      <div>
+        <div class="stat-num">5</div>
+        <div class="stat-label">APAC Markets</div>
+      </div>
+      <div>
+        <div class="stat-num">350+</div>
+        <div class="stat-label">People Supported</div>
       </div>
     </div>
   </div>
-  <div class="screen" id="screen-question">
-    <div class="progress-bar"><div class="progress-fill" id="progress-fill"></div></div>
-    <div class="question-count" id="question-count"></div>
-    <div class="question-text" id="question-text"></div>
-    <div class="options" id="options-container"></div>
-  </div>
-  <div class="screen" id="screen-context">
-    <div class="fade-in">
-      <div class="question-count">One final question</div>
-      <div class="question-text">Is there anything happening outside of work right now that is affecting how you show up?</div>
-      <div class="context-options">
-        <button class="context-btn" onclick="handleContext(false)">No. My responses reflect my work experience only.</button>
-        <button class="context-btn" onclick="handleContext(true)">Yes. Something personal is currently affecting me at work.</button>
+</section>
+
+<section class="section" id="focus">
+  <div class="label">Focus Areas</div>
+  <div class="focus-grid">
+    <div class="focus-item">
+      <span class="focus-num">01</span>
+      <div>
+        <div class="focus-title">Manager Disengagement</div>
+        <p class="focus-body">A disengaged manager costs more than a disengaged employee because the damage travels downward fast. I help organisations identify when this is happening, understand the root cause, and create conditions for recovery before the team pays the price.</p>
+      </div>
+    </div>
+    <div class="focus-item">
+      <span class="focus-num">02</span>
+      <div>
+        <div class="focus-title">Quiet Resignation. Except It Is Never Quiet.</div>
+        <p class="focus-body">By the time someone resigns, the warning signs have been visible for weeks. A drop in initiative. A change in how they speak in meetings. A withdrawal so gradual it looks like professionalism. I help leaders build the diagnostic literacy to catch these signals before a valued person walks out the door.</p>
+      </div>
+    </div>
+    <div class="focus-item">
+      <span class="focus-num">03</span>
+      <div>
+        <div class="focus-title">The Cost of Busyness</div>
+        <p class="focus-body">When workload consistently takes priority over people, the first thing to disappear is psychological safety. Then trust. Then retention. I work with leadership teams to identify where operational pressure is quietly eroding team health and put practical systems in place before the damage compounds.</p>
+      </div>
+    </div>
+    <div class="focus-item">
+      <span class="focus-num">04</span>
+      <div>
+        <div class="focus-title">Connection, Validation, Purpose</div>
+        <p class="focus-body">These three things sit beneath every retention problem, every disengagement conversation, and every team that stops performing. I help leaders understand where these fundamentals are breaking down in their specific context and build manager capability to restore them systematically.</p>
       </div>
     </div>
   </div>
-  <div class="screen" id="screen-context-result">
-    <div class="fade-in">
-      <div class="result-label">Acknowledged</div>
-      <div class="context-result-title">Thank you for sharing that.</div>
-      <div class="result-divider"></div>
-      <div class="context-result-body">
-        <p>Whatever you are managing outside of work is acknowledged. This diagnostic is not the appropriate tool for what you are experiencing right now.</p>
-        <p>Please reach out to your People Partner directly. Your conversation will be completely confidential and support is available to you.</p>
+</section>
+
+<section class="section section-alt" id="tools">
+  <div class="label">Tools and Templates</div>
+  <p class="tools-intro">Practical resources for leaders and People teams. Built from real conversations, real markets, and years of learning what actually moves the needle.</p>
+  <div class="tools-grid">
+    <div class="tool-card">
+      <div class="tool-badge">Free Download</div>
+      <div class="tool-title">Stay Interview Question Guide</div>
+      <p class="tool-desc">Ten questions that get honest answers before someone decides to leave. Built for managers who want to understand what their people actually need, while they still can.</p>
+      <a href="#newsletter" class="tool-action">Get Free via Newsletter &#8594;</a>
+    </div>
+    <div class="tool-card">
+      <div class="tool-badge">Free Download</div>
+      <div class="tool-title">Manager One on One Framework</div>
+      <p class="tool-desc">A simple structure for a real conversation, not a status update. Makes people feel heard in 45 minutes. Covers check-in, growth, relationship, and next steps.</p>
+      <a href="Manager_One_on_One_Framework.pdf" class="tool-action" download>Download Free &#8594;</a>
+    </div>
+    <div class="tool-card">
+      <div class="tool-badge">Free Download</div>
+      <div class="tool-title">Difficult Conversation Planner</div>
+      <p class="tool-desc">Most hard conversations go badly because of what was not thought through beforehand. This one-page planner helps you walk in clear, honest, and ready.</p>
+      <a href="Difficult_Conversation_Planner.pdf" class="tool-action" download>Download Free &#8594;</a>
+    </div>
+    <div class="tool-card">
+      <div class="tool-badge">Tool · SGD 19</div>
+      <div class="tool-title">ReviewRight — Performance Review Generator</div>
+      <p class="tool-desc">Vague performance reviews damage trust, create legal risk, and leave employees confused. ReviewRight helps managers write clear, specific, and fair reviews in seconds. Enter five data points. Get language that actually serves the person and protects the organisation.</p>
+      <p style="font-size:0.75rem;color:var(--gold);font-style:italic;line-height:1.6;margin-bottom:1rem;">Built after watching managers unintentionally damage relationships during review season because nobody gave them the right tools or language.</p>
+      <a href="mailto:hello@noerhameed.com?subject=ReviewRight Early Access" class="tool-action">Join Early Access &#8594;</a>
+    </div>
+    <div class="tool-card">
+      <div class="tool-badge">Signature Work</div>
+      <div class="tool-title">People Diagnostic Tool</div>
+      <p class="tool-desc">A structured framework for identifying disengagement before it becomes resignation. Eight states. One facilitated conversation. Built for People Partners who want to get ahead of it.</p>
+      <p style="font-size:0.75rem;color:var(--gold);font-style:italic;line-height:1.6;margin-bottom:1rem;">Built because most organisations only start asking questions after someone resigns. This tool helps you ask them five months earlier.</p>
+      <a href="mailto:hello@noerhameed.com?subject=Diagnostic Tool Waitlist" class="tool-action">Join Waitlist &#8594;</a>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="newsletter">
+  <div class="label">Newsletter</div>
+  <div class="newsletter-wrap">
+    <h2>The Quiet Signals</h2>
+    <p style="font-size:0.78rem;letter-spacing:0.14em;text-transform:uppercase;color:var(--gold);margin-bottom:0.75rem;">The hidden psychology of work</p>
+    <p>5-minute reads on disengagement, leadership behaviour, quiet resignation, and the conversations organisations keep missing. Written from five APAC markets for leaders and HR professionals who want to understand what is actually happening with their people.</p>
+    <p style="font-size:0.85rem;color:var(--sand);font-weight:400;margin-bottom:1.5rem;">Subscribe and receive the Stay Interview Question Guide free.</p>
+    <a href="mailto:hello@noerhameed.com?subject=Subscribe to The Quiet Signals"
+       style="display:inline-block;padding:0.95rem 2rem;background:var(--gold);color:var(--dark);text-decoration:none;font-size:0.75rem;font-weight:500;letter-spacing:0.14em;text-transform:uppercase;"
+       onmouseover="this.style.background='var(--gold-light)'"
+       onmouseout="this.style.background='var(--gold)'">
+      Subscribe and Get Free Guide &#8594;
+    </a>
+    <p class="newsletter-note" style="margin-top:0.85rem;">Monthly. No spam. Unsubscribe any time. Full newsletter platform launching soon.</p>
+  </div>
+</section>
+
+<section class="section" id="writing">
+  <div class="label">Writing</div>
+  <p class="tools-intro">Short reads on the hidden psychology of work. Observations from five markets, written for leaders and HR professionals who want to think more clearly about people.</p>
+  <div style="max-width:680px;">
+    <div style="padding:1.75rem 0;border-bottom:1px solid var(--border-dim);">
+      <div style="font-size:0.6rem;letter-spacing:0.18em;text-transform:uppercase;color:var(--gold);margin-bottom:0.6rem;">First piece drops June 2026</div>
+      <div style="font-family:'Playfair Display',serif;font-size:1rem;color:var(--sand);margin-bottom:0.4rem;font-weight:400;">Why Quiet Resignation Is Never Actually Quiet</div>
+      <div style="font-size:0.8rem;color:var(--muted);font-weight:300;line-height:1.75;">The signals are there weeks before the resignation letter. Most leaders miss them not because they are invisible, but because nobody was asking the right questions.</div>
+    </div>
+    <div style="padding:1.75rem 0;border-bottom:1px solid var(--border-dim);">
+      <div style="font-size:0.6rem;letter-spacing:0.18em;text-transform:uppercase;color:var(--gold);margin-bottom:0.6rem;">July 2026</div>
+      <div style="font-family:'Playfair Display',serif;font-size:1rem;color:var(--sand);margin-bottom:0.4rem;font-weight:400;">The Moment Employees Stop Speaking Up</div>
+      <div style="font-size:0.8rem;color:var(--muted);font-weight:300;line-height:1.75;">It rarely happens dramatically. It happens in small moments where honesty felt too risky and silence felt safer. And once it becomes a habit, it is very hard to undo.</div>
+    </div>
+    <div style="padding:1.75rem 0;border-bottom:1px solid var(--border-dim);">
+      <div style="font-size:0.6rem;letter-spacing:0.18em;text-transform:uppercase;color:var(--gold);margin-bottom:0.6rem;">August 2026</div>
+      <div style="font-family:'Playfair Display',serif;font-size:1rem;color:var(--sand);margin-bottom:0.4rem;font-weight:400;">What Manager Disengagement Actually Costs a Team</div>
+      <div style="font-size:0.8rem;color:var(--muted);font-weight:300;line-height:1.75;">A disengaged manager rarely looks disengaged. They show up, they deliver, they run the meetings. But their team knows. And the cost accumulates quietly over time.</div>
+    </div>
+    <div style="padding-top:1.75rem;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem;">
+      <p style="font-size:0.78rem;color:var(--muted);font-weight:300;max-width:400px;">Subscribe to The Quiet Signals to receive each piece directly in your inbox when it drops.</p>
+      <a href="#newsletter" style="font-size:0.72rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--gold);text-decoration:none;">Subscribe &#8594;</a>
+    </div>
+  </div>
+</section>
+
+<section class="section section-alt" id="testimonials">
+  <div class="label">What Others Say</div>
+  <div class="testimonial-grid">
+    <div class="testimonial-card">
+      <p class="testimonial-quote">"She takes the time to understand her team members, both professionally and personally. Her leadership has not only helped me develop my skills but also feel valued and motivated every day. She leads with both her head and her heart."</p>
+      <div class="testimonial-person">
+        <div class="t-avatar">OA</div>
+        <div>
+          <div class="t-name">Oktaviani Aditia</div>
+          <div class="t-role">People Manager, M+C Saatchi Performance</div>
+        </div>
       </div>
-      <button class="btn-restart" onclick="restart()">Start again</button>
-      <div class="brand">People Diagnostic Tool</div>
     </div>
   </div>
-  <div class="screen" id="screen-result">
-    <div class="fade-in">
-      <div class="result-label" id="result-label"></div>
-      <div class="result-state" id="result-state"></div>
-      <div class="result-divider"></div>
-      <div class="result-description" id="result-description"></div>
-      <div class="result-footer" id="result-footer"></div>
-      <button class="btn-restart" onclick="restart()">Start again</button>
-      <div class="brand">People Diagnostic Tool</div>
+  <p style="font-size:0.75rem;color:var(--muted);margin-top:1.5rem;font-weight:300;max-width:400px;">Additional testimonials from senior APAC leaders in progress. This section grows as relationships do.</p>
+</section>
+
+<!-- BOOKS - hidden. Change display:none to display:block to activate -->
+<section class="section" id="books" style="display:none;">
+  <div class="label">Reading List</div>
+  <p class="tools-intro">Books that have shaped how I think about people, organisations, and behaviour at work. Recommended because I have read them.</p>
+  <div style="max-width:680px;">
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:1.25rem;">
+      <div style="border:1px solid var(--border);padding:1.5rem;">
+        <div style="font-size:0.58rem;letter-spacing:0.16em;text-transform:uppercase;color:var(--gold);margin-bottom:0.6rem;">Behaviour</div>
+        <div style="font-family:'Playfair Display',serif;font-size:0.95rem;color:var(--sand);margin-bottom:0.3rem;">Drive</div>
+        <div style="font-size:0.78rem;color:var(--muted);margin-bottom:0.75rem;">Daniel Pink</div>
+        <p style="font-size:0.78rem;color:var(--muted);font-weight:300;line-height:1.7;">Why the carrot and stick no longer work and what actually motivates people.</p>
+      </div>
+      <div style="border:1px solid var(--border);padding:1.5rem;">
+        <div style="font-size:0.58rem;letter-spacing:0.16em;text-transform:uppercase;color:var(--gold);margin-bottom:0.6rem;">Negotiation</div>
+        <div style="font-family:'Playfair Display',serif;font-size:0.95rem;color:var(--sand);margin-bottom:0.3rem;">Never Split the Difference</div>
+        <div style="font-size:0.78rem;color:var(--muted);margin-bottom:0.75rem;">Chris Voss</div>
+        <p style="font-size:0.78rem;color:var(--muted);font-weight:300;line-height:1.7;">How to have hard conversations and actually get somewhere with them.</p>
+      </div>
+      <div style="border:1px solid var(--border);padding:1.5rem;">
+        <div style="font-size:0.58rem;letter-spacing:0.16em;text-transform:uppercase;color:var(--gold);margin-bottom:0.6rem;">Culture</div>
+        <div style="font-family:'Playfair Display',serif;font-size:0.95rem;color:var(--sand);margin-bottom:0.3rem;">The Culture Code</div>
+        <div style="font-size:0.78rem;color:var(--muted);margin-bottom:0.75rem;">Daniel Coyle</div>
+        <p style="font-size:0.78rem;color:var(--muted);font-weight:300;line-height:1.7;">What the best teams in the world do differently and why it is not what you think.</p>
+      </div>
+      <div style="border:1px solid var(--border);padding:1.5rem;">
+        <div style="font-size:0.58rem;letter-spacing:0.16em;text-transform:uppercase;color:var(--gold);margin-bottom:0.6rem;">Psychology</div>
+        <div style="font-family:'Playfair Display',serif;font-size:0.95rem;color:var(--sand);margin-bottom:0.3rem;">Behave</div>
+        <div style="font-size:0.78rem;color:var(--muted);margin-bottom:0.75rem;">Robert Sapolsky</div>
+        <p style="font-size:0.78rem;color:var(--muted);font-weight:300;line-height:1.7;">The biology behind why humans do what they do. Dense but worth it.</p>
+      </div>
     </div>
   </div>
-</div>
-<script>
-  const questions = [
-    {
-      state: "Lost Their Spark",
-      text: "When you think about coming to work, which of the following feels most honest right now?",
-      options: [
-        "I feel energised and engaged. Work feels meaningful.",
-        "Some days are better than others. Overall, I am managing.",
-        "I am going through the motions. Most days feel harder than they should.",
-        "I am struggling. Showing up feels heavy."
-      ]
-    },
-    {
-      state: "Lost Their Why",
-      text: "When you reflect on why your work matters to you personally, which of the following feels most true?",
-      options: [
-        "My work feels purposeful. I know why I do what I do.",
-        "I have a sense of purpose, but it feels less clear than it used to.",
-        "I am going through the motions. The meaning behind my work has faded.",
-        "I have lost sight of why my work matters."
-      ]
-    },
-    {
-      state: "Lost Their Path",
-      text: "How clear does your future feel here right now?",
-      options: [
-        "Clear. I know where I am heading and what I need to do to get there.",
-        "Mostly clear, but some things feel uncertain lately.",
-        "Unclear. I am not sure what my options are or where this is going.",
-        "I do not know what my career options are here anymore."
-      ]
-    },
-    {
-      state: "Lost Their Voice",
-      text: "How comfortable do you feel sharing your thoughts and opinions at work?",
-      options: [
-        "Very comfortable. I speak up freely and my views are genuinely valued.",
-        "Somewhat comfortable. It depends on the situation or who is in the room.",
-        "Not very comfortable. I hold back because it rarely feels safe or worthwhile.",
-        "Not comfortable at all. I have stopped sharing. It makes no difference."
-      ]
-    },
-    {
-      state: "Lost Their People",
-      text: "How would you describe your working relationships right now?",
-      options: [
-        "Strong. I have genuine connections that make work worthwhile.",
-        "Manageable. Some relationships have faded but I am doing fine.",
-        "Thin. Work feels more transactional and less connected than it used to.",
-        "Absent. I feel isolated from the people around me."
-      ]
-    },
-    {
-      state: "Lost Their Balance",
-      text: "How sustainable is your current workload?",
-      options: [
-        "Very sustainable. I feel in control of what is on my plate.",
-        "Mostly manageable, with some pressure at times.",
-        "Too much. I am consistently overwhelmed.",
-        "Unsustainable. I am running on empty."
-      ]
-    },
-    {
-      state: "Lost Their Trust",
-      text: "How much do you trust the decisions being made around you at work?",
-      options: [
-        "I trust the people and decisions around me. I feel confident in the direction we are heading.",
-        "I have some doubts, but overall I still feel supported and informed.",
-        "I feel left out of decisions that affect me. My trust is wearing thin.",
-        "I have lost confidence in the decisions being made around me."
-      ]
-    }
-  ];
+</section>
 
-  const results = {
-    "Thriving": {
-      label: "Thriving",
-      description: "You are doing well. Genuinely well.\n\nThe work feels meaningful. You are the best version of yourself right now and it shows.\n\nYou are operating at your highest level. Your energy is an asset to you and the people around you.\n\nTake a moment to name what is working. Write down three things that are making work feel worthwhile right now. Keep that list somewhere you can return to.\n\nIn your next 1:1 share with your manager what keeps you engaged and explore whether you could be stretched further or take on something new.",
-      footer: ""
-    },
-    "Lost Their Spark": {
-      label: "Lost Their Spark",
-      description: "Something has shifted. You are showing up and delivering but the energy that once made work feel meaningful has quietly faded.\n\nThink about the last time work genuinely energised you. What did you have more of then that feels less present now?\n\nTry this: write down three things that used to make you look forward to work. Then write down what has changed.\n\nIf it would help to talk it through, your manager or People Partner is available to you.",
-      footer: ""
-    },
-    "Lost Their Why": {
-      label: "Lost Their Why",
-      description: "You are delivering. But somewhere along the way the reason behind it has faded. The connection between your work and what matters to you personally has become unclear.\n\nReflect on when your work last felt purposeful. Not to the business. To you. That is where this conversation needs to start.\n\nWrite down what originally drew you to this role. Then write down what still holds true and what no longer does. The gap between those two lists is worth a conversation.\n\nIf it would help to talk it through, your manager or People Partner is available to you.",
-      footer: ""
-    },
-    "Lost Their Path": {
-      label: "Lost Their Path",
-      description: "Something about the road ahead feels unclear. Not your ability. Not your effort. But the direction. Where this is going. What comes next. Whether there is still a future here worth building toward.\n\nWhen the path feels uncertain, everything else gets harder. Goals feel distant. Development stalls. The motivation to invest in what comes next quietly fades.\n\nWrite down where you hoped to be by now. Then write down what feels unclear or out of reach. The gap between those two things is worth a real conversation.\n\nIf it would help to talk it through, your manager or People Partner is available to you.",
-      footer: ""
-    },
-    "Lost Their Voice": {
-      label: "Lost Their Voice",
-      description: "Your thoughts are still there. You just are not sharing them as freely as you once did. Something, an experience, a pattern, a room that does not feel safe, has made speaking up feel less worthwhile than it should.\n\nWhen people stop speaking, the people around them lose the thinking they most need to hear.\n\nThink about the last time you held something back. What stopped you? Write it down. You do not have to share it with anyone. Just name it for yourself first.\n\nIf it would help to talk it through, your manager or People Partner is available to you.",
-      footer: ""
-    },
-    "Lost Their People": {
-      label: "Lost Their People",
-      description: "Work has started to feel more transactional than it used to. The connections that once made showing up worthwhile have thinned. You are still there but the sense of genuinely belonging with the people around you has quietly faded.\n\nThis is not weakness. Feeling connected to the people you work with is a real and legitimate need. When it is absent the impact is felt even when it is hard to name.\n\nThink about one person at work you feel genuinely connected to. If no one comes to mind easily, that is important information.\n\nIf it would help to talk it through, your manager or People Partner is available to you.",
-      footer: ""
-    },
-    "Lost Their Balance": {
-      label: "Lost Their Balance",
-      description: "The workload is not sustainable right now. You are consistently giving more than what can be maintained and the impact is building whether you can feel it yet or not.\n\nThis is not about working hard. It is about running on a level that leaves nothing in reserve. No space to think. No room to grow. No capacity to be anything other than reactive.\n\nTry this: write down what you need to start doing to protect your energy, what you need to stop taking on, and what you want to continue because it still works. Bring that list into a conversation with your manager.\n\nIf it would help to talk it through, your manager or People Partner is available to you.",
-      footer: ""
-    },
-    "Lost Their Trust": {
-      label: "Lost Their Trust",
-      description: "Something has happened. A decision that did not sit right. A promise that was not kept. A moment where the organisation showed you something that is hard to unsee.\n\nTrust does not break loudly. It erodes quietly. And once it does, everything else feels different. The same words land differently. The same actions carry a different weight.\n\nThis is the hardest state to recover from without a direct and honest conversation. Not a general one. A specific one about what happened and what needs to change.\n\nYour People Partner is available to you. This conversation is confidential.",
-      footer: ""
-    }
-  };
+<!-- PERKS - hidden. Change display:none to display:block to activate -->
+<section class="section section-alt" id="perks" style="display:none;">
+  <div class="label">Perks and Discounts</div>
+  <p class="tools-intro">Tools and platforms I use and genuinely recommend. Where available I have negotiated a discount for my readers.</p>
+  <div class="tools-grid">
+    <div class="tool-card">
+      <div class="tool-badge">HR Learning</div>
+      <div class="tool-title">AIHR</div>
+      <p class="tool-desc">The best online HR learning platform I have come across. Practical, evidence-based, and built for practitioners who want to go deeper than most HR courses allow.</p>
+      <span class="tool-soon">Discount Code Coming</span>
+    </div>
+  </div>
+</section>
 
-  let answers = [], currentQuestion = 0;
+<section class="section" id="contact">
+  <div class="label" style="text-align:center;">Work With Me</div>
+  <div class="contact-wrap">
+    <h2>Let us talk about your people.</h2>
+    <p>I work with leaders and HR professionals across APAC who want to understand what is really happening with their people before it becomes a problem they cannot solve.</p>
+    <div style="text-align:left;margin:1.75rem auto;max-width:400px;display:flex;flex-direction:column;gap:1.25rem;">
+      <div style="border:1px solid var(--border);padding:1.25rem;">
+        <div style="font-size:0.6rem;letter-spacing:0.16em;text-transform:uppercase;color:var(--gold);margin-bottom:0.5rem;">Available Now</div>
+        <div style="font-size:0.85rem;color:var(--sand);font-weight:500;margin-bottom:0.35rem;">People Strategy Advisory</div>
+        <div style="font-size:0.78rem;color:var(--muted);font-weight:300;line-height:1.7;">For leaders navigating disengagement, retention challenges, or team health issues across APAC markets. Diagnostic conversations, manager enablement, and people strategy support.</div>
+      </div>
+      <div style="border:1px solid var(--border);padding:1.25rem;">
+        <div style="font-size:0.6rem;letter-spacing:0.16em;text-transform:uppercase;color:var(--gold);margin-bottom:0.5rem;">Available Now</div>
+        <div style="font-size:0.85rem;color:var(--sand);font-weight:500;margin-bottom:0.35rem;">Writing and Collaboration</div>
+        <div style="font-size:0.78rem;color:var(--muted);font-weight:300;line-height:1.7;">Contributing to HR publications, podcasts, panels, and thought leadership initiatives focused on organisational psychology and people strategy in APAC.</div>
+      </div>
+      <div style="border:1px solid var(--border);padding:1.25rem;">
+        <div style="font-size:0.6rem;letter-spacing:0.16em;text-transform:uppercase;color:var(--gold);margin-bottom:0.5rem;">Building Now</div>
+        <div style="font-size:0.85rem;color:var(--sand);font-weight:500;margin-bottom:0.35rem;">Speaking and Workshops</div>
+        <div style="font-size:0.78rem;color:var(--muted);font-weight:300;line-height:1.7;">Available for HR conferences, leadership panels, and team workshops across APAC on disengagement, manager effectiveness, and the hidden psychology of work.</div>
+      </div>
+    </div>
+    <p style="font-size:0.8rem;color:var(--muted);margin-bottom:1.5rem;font-weight:300;">Email directly to start a conversation. Response within 48 hours.</p>
+    <a href="mailto:hello@noerhameed.com" class="contact-email">hello@noerhameed.com</a>
+  </div>
+</section>
 
-  function startDiagnostic() {
-    answers = [];
-    currentQuestion = 0;
-    showQuestion(0);
-    showScreen('screen-question');
-  }
+<footer>
+  <span>2026 Noer (Misbah) Hameed</span>
+  <a href="https://www.linkedin.com/in/misbah-hameedpeoplepartner/" target="_blank">LinkedIn &#8599;</a>
+</footer>
 
-  function showQuestion(index) {
-    const q = questions[index];
-    const letters = ['A','B','C','D'];
-    const progress = (index / questions.length) * 100;
-    document.getElementById('progress-fill').style.width = progress + '%';
-    document.getElementById('question-count').textContent = 'Question ' + (index + 1) + ' of ' + questions.length;
-    document.getElementById('question-text').textContent = q.text;
-    const container = document.getElementById('options-container');
-    container.innerHTML = '';
-    q.options.forEach((opt, i) => {
-      const btn = document.createElement('button');
-      btn.className = 'option';
-      btn.innerHTML = '<span class="option-letter">' + letters[i] + '</span><span>' + opt + '</span>';
-      btn.onclick = () => selectAnswer(i);
-      container.appendChild(btn);
-    });
-    document.getElementById('question-text').classList.remove('fade-in');
-    container.classList.remove('fade-in');
-    void document.getElementById('question-text').offsetWidth;
-    document.getElementById('question-text').classList.add('fade-in');
-    container.classList.add('fade-in');
-  }
-
-  function selectAnswer(optionIndex) {
-    document.querySelectorAll('.option').forEach(o => o.classList.remove('selected'));
-    document.querySelectorAll('.option')[optionIndex].classList.add('selected');
-    const score = 4 - optionIndex;
-    answers.push({ state: questions[currentQuestion].state, score: score });
-    setTimeout(() => {
-      currentQuestion++;
-      if (currentQuestion < questions.length) {
-        showQuestion(currentQuestion);
-      } else {
-        showScreen('screen-context');
-      }
-    }, 350);
-  }
-
-  function handleContext(hasPersonalContext) {
-    if (hasPersonalContext) {
-      showScreen('screen-context-result');
-    } else {
-      showResult();
-    }
-  }
-
-  function showResult() {
-    const lowestScore = Math.min(...answers.map(a => a.score));
-    let stateName;
-    if (lowestScore >= 4) {
-      stateName = "Thriving";
-    } else {
-      let lowest = answers[0];
-      answers.forEach(a => { if (a.score < lowest.score) lowest = a; });
-      stateName = lowest.state;
-    }
-    const result = results[stateName];
-    document.getElementById('result-label').textContent = result.label;
-    document.getElementById('result-state').textContent = stateName;
-    document.getElementById('result-description').innerHTML = result.description.replace(/\n\n/g, '<br><br>');
-    document.getElementById('result-footer').textContent = result.footer;
-    showScreen('screen-result');
-  }
-
-  function showScreen(id) {
-    document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
-    document.getElementById(id).classList.add('active');
-    window.scrollTo(0, 0);
-  }
-
-  function restart() {
-    answers = [];
-    currentQuestion = 0;
-    showScreen('screen-welcome');
-  }
-</script>
 </body>
 </html>
+
