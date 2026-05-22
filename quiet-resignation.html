@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Quiet Resignation Is Never Actually Quiet — Noer (Misbah) Hameed</title>
+<meta name="description" content="We keep talking about quiet quitting like it is something you spot. But disengagement does not announce itself. It whispers.">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --dark:       #0D2B1F;
+  --dark-mid:   #0F2318;
+  --gold:       #D4A843;
+  --gold-light: #E2C070;
+  --sand:       #F0E9D6;
+  --muted:      #6B9478;
+  --text:       #E8E0CF;
+  --border-dim: rgba(212,168,67,0.08);
+  --pad: 1.5rem;
+}
+
+@media(min-width:768px) { :root { --pad: 4rem; } }
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'DM Sans', sans-serif;
+  background: var(--dark);
+  color: var(--text);
+  font-size: 15px;
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+}
+
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 0 var(--pad);
+  height: 62px;
+  background: rgba(13,43,31,0.97);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border-dim);
+}
+
+.nav-logo {
+  font-family: 'Playfair Display', serif;
+  font-size: 0.9rem;
+  color: var(--gold-light);
+  letter-spacing: 0.03em;
+  text-decoration: none;
+}
+
+.nav-back {
+  font-size: 0.68rem;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+  color: var(--muted);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.nav-back:hover { color: var(--gold-light); }
+
+.article-wrap {
+  max-width: 640px;
+  margin: 0 auto;
+  padding: 120px var(--pad) 80px;
+}
+
+.article-meta {
+  margin-bottom: 2.5rem;
+}
+
+.article-tag {
+  font-size: 0.62rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 1rem;
+  display: block;
+}
+
+.article-title {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(1.75rem, 4vw, 2.8rem);
+  font-weight: 700;
+  line-height: 1.15;
+  color: var(--sand);
+  margin-bottom: 1.25rem;
+}
+
+.article-date {
+  font-size: 0.72rem;
+  color: var(--muted);
+  letter-spacing: 0.08em;
+}
+
+.article-divider {
+  border: none;
+  border-top: 1px solid var(--border-dim);
+  margin: 2rem 0;
+}
+
+.article-body p {
+  font-size: 1rem;
+  color: var(--text);
+  font-weight: 300;
+  line-height: 1.95;
+  margin-bottom: 1.5rem;
+}
+
+.article-body p.lead {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.2rem;
+  font-style: italic;
+  color: var(--sand);
+  line-height: 1.75;
+  margin-bottom: 2rem;
+}
+
+.article-body p.pullquote {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.1rem;
+  font-style: italic;
+  color: var(--gold-light);
+  line-height: 1.75;
+  border-left: 2px solid var(--gold);
+  padding-left: 1.5rem;
+  margin: 2rem 0;
+}
+
+.article-body p.closing {
+  font-family: 'Playfair Display', serif;
+  font-size: 1rem;
+  font-style: italic;
+  color: var(--sand);
+  line-height: 1.8;
+  margin-top: 2.5rem;
+}
+
+.article-footer {
+  margin-top: 4rem;
+  padding-top: 2rem;
+  border-top: 1px solid var(--border-dim);
+}
+
+.author-block {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.author-avatar {
+  width: 44px; height: 44px;
+  border-radius: 50%;
+  background: rgba(212,168,67,0.1);
+  border: 1px solid rgba(212,168,67,0.25);
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'Playfair Display', serif;
+  font-size: 1rem;
+  color: var(--gold);
+  font-style: italic;
+  flex-shrink: 0;
+}
+
+.author-name {
+  font-size: 0.85rem;
+  color: var(--sand);
+  font-weight: 500;
+  margin-bottom: 0.2rem;
+}
+
+.author-role {
+  font-size: 0.75rem;
+  color: var(--muted);
+  font-weight: 300;
+}
+
+.newsletter-cta {
+  background: var(--dark-mid);
+  border: 1px solid rgba(212,168,67,0.15);
+  padding: 1.75rem;
+  margin-top: 1rem;
+}
+
+.newsletter-cta h3 {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.1rem;
+  color: var(--sand);
+  font-weight: 400;
+  margin-bottom: 0.6rem;
+}
+
+.newsletter-cta p {
+  font-size: 0.82rem;
+  color: var(--muted);
+  font-weight: 300;
+  line-height: 1.75;
+  margin-bottom: 1.25rem;
+}
+
+.cta-btn {
+  display: inline-block;
+  padding: 0.75rem 1.75rem;
+  background: var(--gold);
+  color: var(--dark);
+  text-decoration: none;
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  transition: background 0.25s;
+}
+
+.cta-btn:hover { background: var(--gold-light); }
+
+footer {
+  padding: 1.25rem var(--pad);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.68rem;
+  color: var(--muted);
+  border-top: 1px solid var(--border-dim);
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+footer a { color: var(--muted); text-decoration: none; transition: color 0.2s; }
+footer a:hover { color: var(--gold-light); }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo">Noer (Misbah) Hameed</a>
+  <a href="index.html#writing" class="nav-back">Back to Writing</a>
+</nav>
+
+<div class="article-wrap">
+
+  <div class="article-meta">
+    <span class="article-tag">Disengagement · Leadership · People Strategy</span>
+    <h1 class="article-title">Quiet Resignation Is Never Actually Quiet</h1>
+    <span class="article-date">May 2026 · 4 minute read</span>
+  </div>
+
+  <hr class="article-divider">
+
+  <div class="article-body">
+
+    <p class="lead">We keep talking about quiet quitting like it is something you spot. But disengagement does not announce itself. It whispers. And the only people who hear it are the ones who were already paying attention long before it started.</p>
+
+    <p>Watch closely enough and you will see it. The sighing. The glazed eyes. The inbox opened and closed without a reply. The person whose spirit has clearly left on a plane, destination unknown, while their body is still showing up on time.</p>
+
+    <p>Most leaders are looking for the signs. The drop in output. The missed deadline. The one-word answers in meetings. But by the time those signals are visible, the conversation that mattered has already passed. The window was weeks ago. You just did not know it was open.</p>
+
+    <p class="pullquote">You cannot spot disengagement. You can only hear it. And only if you are genuinely listening.</p>
+
+    <p>Not listening to respond. Not listening to insert your own experience or offer your perspective or fix the problem before you have understood it. Just being present enough in the moment to notice something feels different. And curious enough to ask why.</p>
+
+    <p>That is a completely different skill from observation. And most of us are never taught it.</p>
+
+    <p>The tell is not in the signs. It is in the conversation. The follow up question you ask because something did not quite add up. The pause you sit with instead of filling. The why you ask when everyone else has already moved on.</p>
+
+    <p>I have seen this across five APAC markets. In Singapore, in Jakarta, in Bangalore, in Bangkok, in Manila. The cultural expression differs. In some markets people are extraordinarily good at maintaining composure under disengagement. The mask is thicker. The professional distance is wider. But underneath, the pattern is the same. Something shifts before it surfaces. And the leader who catches it is almost never the one who was looking hardest. It is the one who had built enough of a relationship that the person felt safe enough to let something slip.</p>
+
+    <p>And yes, this is harder remotely. Body language does not travel through a screen the same way. But here is what does travel. Your history with someone. Every previous conversation. Every response. Every moment of energy or flatness you have witnessed over time. That accumulated knowledge is your benchmark. You do not need to remember every detail. You just need to have invested enough in the relationship that your instinct has something real to work from.</p>
+
+    <p class="pullquote">Disengagement does not announce itself. It whispers. And the only people who hear it are the ones who were already paying attention long before it started.</p>
+
+    <p>That is the part nobody talks about. We spend enormous energy building systems to detect disengagement after it has happened. Exit surveys. Engagement scores. Stay interviews that come six months too late. All of it useful. None of it early enough.</p>
+
+    <p>The leaders who retain people are not the ones with the best frameworks. They are the ones whose people feel seen consistently enough that when something starts to shift, they say something. Not because there is a policy that encourages it. Because the relationship has made it feel safe to.</p>
+
+    <p class="closing">The question is not whether you can spot the signs. The question is whether you have built the kind of relationship where someone would tell you before it got that far.</p>
+
+  </div>
+
+  <div class="article-footer">
+    <div class="author-block">
+      <div class="author-avatar">N</div>
+      <div>
+        <div class="author-name">Noer (Misbah) Hameed</div>
+        <div class="author-role">People Strategist · APAC · IHRP-CP</div>
+      </div>
+    </div>
+
+    <div class="newsletter-cta">
+      <h3>The Quiet Signals</h3>
+      <p>Monthly writing on the hidden psychology of work. Disengagement, leadership behaviour, and the conversations organisations keep missing. Written from five APAC markets.</p>
+      <a href="mailto:hello@noerhameed.com?subject=Subscribe to The Quiet Signals" class="cta-btn">Subscribe Free &#8594;</a>
+    </div>
+  </div>
+
+</div>
+
+<footer>
+  <span>2026 Noer (Misbah) Hameed</span>
+  <a href="https://www.linkedin.com/in/misbah-hameedpeoplepartner/" target="_blank">LinkedIn &#8599;</a>
+</footer>
+
+</body>
+</html>

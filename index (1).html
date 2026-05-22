@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>People Diagnostic Tool</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Georgia', serif; background: #0a0a0a; color: #ffffff; min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 20px; }
+    .container { max-width: 720px; width: 100%; }
+    .screen { display: none; }
+    .screen.active { display: block; }
+    .welcome-label { font-family: 'Arial', sans-serif; font-size: 11px; letter-spacing: 3px; color: #2E8B8B; text-transform: uppercase; margin-bottom: 24px; }
+    .welcome-title { font-size: clamp(22px, 4vw, 32px); font-weight: normal; line-height: 1.3; color: #ffffff; margin-bottom: 32px; letter-spacing: 1px; }
+    .welcome-body { font-family: 'Arial', sans-serif; font-size: 15px; line-height: 1.9; color: #aaaaaa; margin-bottom: 48px; }
+    .welcome-body p { margin-bottom: 16px; }
+    .btn-start { font-family: 'Arial', sans-serif; font-size: 12px; letter-spacing: 2px; text-transform: uppercase; background: transparent; color: #2E8B8B; border: 1px solid #2E8B8B; padding: 16px 40px; cursor: pointer; transition: all 0.3s ease; margin-bottom: 40px; display: block; }
+    .btn-start:hover { background: #2E8B8B; color: #0a0a0a; }
+    .welcome-sign { font-family: 'Arial', sans-serif; font-size: 12px; color: #444444; line-height: 1.8; }
+    .welcome-sign strong { color: #666666; }
+    .progress-bar { width: 100%; height: 1px; background: #1a1a1a; margin-bottom: 60px; }
+    .progress-fill { height: 100%; background: #2E8B8B; transition: width 0.5s ease; }
+    .question-count { font-family: 'Arial', sans-serif; font-size: 11px; letter-spacing: 3px; color: #333333; text-transform: uppercase; margin-bottom: 40px; }
+    .question-text { font-size: clamp(18px, 3vw, 24px); font-weight: normal; line-height: 1.5; color: #ffffff; margin-bottom: 48px; }
+    .options { display: flex; flex-direction: column; gap: 10px; }
+    .option { font-family: 'Arial', sans-serif; font-size: 14px; line-height: 1.6; color: #777777; background: transparent; border: 1px solid #181818; padding: 16px 22px; cursor: pointer; text-align: left; transition: all 0.2s ease; display: flex; align-items: flex-start; gap: 16px; }
+    .option:hover { border-color: #2E8B8B; color: #ffffff; background: #0a1a1a; }
+    .option.selected { border-color: #2E8B8B; color: #ffffff; background: #0a1a1a; }
+    .option-letter { font-family: 'Arial', sans-serif; font-size: 10px; letter-spacing: 1px; color: #2E8B8B; min-width: 14px; margin-top: 3px; text-transform: uppercase; }
+    .context-options { display: flex; flex-direction: column; gap: 10px; margin-top: 48px; }
+    .context-btn { font-family: 'Arial', sans-serif; font-size: 14px; color: #777777; background: transparent; border: 1px solid #181818; padding: 16px 22px; cursor: pointer; text-align: left; transition: all 0.2s ease; }
+    .context-btn:hover { border-color: #2E8B8B; color: #ffffff; background: #0a1a1a; }
+    .result-label { font-family: 'Arial', sans-serif; font-size: 10px; letter-spacing: 3px; color: #2E8B8B; text-transform: uppercase; margin-bottom: 12px; }
+    .result-state { font-size: clamp(28px, 5vw, 44px); font-weight: normal; line-height: 1.2; color: #ffffff; margin-bottom: 36px; }
+    .result-divider { width: 32px; height: 1px; background: #2E8B8B; margin-bottom: 36px; }
+    .result-description { font-family: 'Arial', sans-serif; font-size: 15px; line-height: 1.9; color: #aaaaaa; margin-bottom: 40px; }
+    .result-footer { font-family: 'Arial', sans-serif; font-size: 12px; line-height: 1.7; color: #444444; margin-bottom: 40px; font-style: italic; }
+    .btn-restart { font-family: 'Arial', sans-serif; font-size: 10px; letter-spacing: 2px; text-transform: uppercase; background: transparent; color: #333333; border: 1px solid #1a1a1a; padding: 12px 28px; cursor: pointer; transition: all 0.3s ease; margin-bottom: 48px; }
+    .btn-restart:hover { color: #2E8B8B; border-color: #2E8B8B; }
+    .brand { font-family: 'Arial', sans-serif; font-size: 10px; letter-spacing: 2px; color: #222222; text-transform: uppercase; }
+    .context-result-title { font-size: clamp(22px, 4vw, 32px); font-weight: normal; line-height: 1.3; color: #ffffff; margin-bottom: 28px; }
+    .context-result-body { font-family: 'Arial', sans-serif; font-size: 15px; line-height: 1.9; color: #aaaaaa; margin-bottom: 40px; }
+    .context-result-body p { margin-bottom: 16px; }
+    .fade-in { animation: fadeIn 0.4s ease forwards; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+    @media (max-width: 480px) { body { padding: 40px 20px; align-items: flex-start; } .option { padding: 14px 18px; font-size: 13px; } }
+  </style>
+</head>
+<body>
+<div class="container">
+  <div class="screen active" id="screen-welcome">
+    <div class="fade-in">
+      <div class="welcome-label">People Diagnostic Tool</div>
+      <h1 class="welcome-title">How are you doing at work?</h1>
+      <div class="welcome-body">
+        <p>This diagnostic is designed to help you identify your current engagement state at work and the recommended actions to address it.</p>
+        <p>Select the response that most accurately reflects your current experience. This is a reflective tool, not a clinical assessment. It is a structured starting point for a conversation.</p>
+        <p>Your responses are confidential. Time to complete: approximately five minutes.</p>
+      </div>
+      <button class="btn-start" onclick="startDiagnostic()">Begin</button>
+      <div class="welcome-sign">
+        <strong>Noer Hameed</strong><br>
+        People Architect
+      </div>
+    </div>
+  </div>
+  <div class="screen" id="screen-question">
+    <div class="progress-bar"><div class="progress-fill" id="progress-fill"></div></div>
+    <div class="question-count" id="question-count"></div>
+    <div class="question-text" id="question-text"></div>
+    <div class="options" id="options-container"></div>
+  </div>
+  <div class="screen" id="screen-context">
+    <div class="fade-in">
+      <div class="question-count">One final question</div>
+      <div class="question-text">Is there anything happening outside of work right now that is affecting how you show up?</div>
+      <div class="context-options">
+        <button class="context-btn" onclick="handleContext(false)">No. My responses reflect my work experience only.</button>
+        <button class="context-btn" onclick="handleContext(true)">Yes. Something personal is currently affecting me at work.</button>
+      </div>
+    </div>
+  </div>
+  <div class="screen" id="screen-context-result">
+    <div class="fade-in">
+      <div class="result-label">Acknowledged</div>
+      <div class="context-result-title">Thank you for sharing that.</div>
+      <div class="result-divider"></div>
+      <div class="context-result-body">
+        <p>Whatever you are managing outside of work is acknowledged. This diagnostic is not the appropriate tool for what you are experiencing right now.</p>
+        <p>Please reach out to your People Partner directly. Your conversation will be completely confidential and support is available to you.</p>
+      </div>
+      <button class="btn-restart" onclick="restart()">Start again</button>
+      <div class="brand">People Diagnostic Tool</div>
+    </div>
+  </div>
+  <div class="screen" id="screen-result">
+    <div class="fade-in">
+      <div class="result-label" id="result-label"></div>
+      <div class="result-state" id="result-state"></div>
+      <div class="result-divider"></div>
+      <div class="result-description" id="result-description"></div>
+      <div class="result-footer" id="result-footer"></div>
+      <button class="btn-restart" onclick="restart()">Start again</button>
+      <div class="brand">People Diagnostic Tool</div>
+    </div>
+  </div>
+</div>
+<script>
+  const questions = [
+    {
+      state: "Lost Their Spark",
+      text: "When you think about coming to work, which of the following feels most honest right now?",
+      options: [
+        "I feel energised and engaged. Work feels meaningful.",
+        "Some days are better than others. Overall, I am managing.",
+        "I am going through the motions. Most days feel harder than they should.",
+        "I am struggling. Showing up feels heavy."
+      ]
+    },
+    {
+      state: "Lost Their Why",
+      text: "When you reflect on why your work matters to you personally, which of the following feels most true?",
+      options: [
+        "My work feels purposeful. I know why I do what I do.",
+        "I have a sense of purpose, but it feels less clear than it used to.",
+        "I am going through the motions. The meaning behind my work has faded.",
+        "I have lost sight of why my work matters."
+      ]
+    },
+    {
+      state: "Lost Their Path",
+      text: "How clear does your future feel here right now?",
+      options: [
+        "Clear. I know where I am heading and what I need to do to get there.",
+        "Mostly clear, but some things feel uncertain lately.",
+        "Unclear. I am not sure what my options are or where this is going.",
+        "I do not know what my career options are here anymore."
+      ]
+    },
+    {
+      state: "Lost Their Voice",
+      text: "How comfortable do you feel sharing your thoughts and opinions at work?",
+      options: [
+        "Very comfortable. I speak up freely and my views are genuinely valued.",
+        "Somewhat comfortable. It depends on the situation or who is in the room.",
+        "Not very comfortable. I hold back because it rarely feels safe or worthwhile.",
+        "Not comfortable at all. I have stopped sharing. It makes no difference."
+      ]
+    },
+    {
+      state: "Lost Their People",
+      text: "How would you describe your working relationships right now?",
+      options: [
+        "Strong. I have genuine connections that make work worthwhile.",
+        "Manageable. Some relationships have faded but I am doing fine.",
+        "Thin. Work feels more transactional and less connected than it used to.",
+        "Absent. I feel isolated from the people around me."
+      ]
+    },
+    {
+      state: "Lost Their Balance",
+      text: "How sustainable is your current workload?",
+      options: [
+        "Very sustainable. I feel in control of what is on my plate.",
+        "Mostly manageable, with some pressure at times.",
+        "Too much. I am consistently overwhelmed.",
+        "Unsustainable. I am running on empty."
+      ]
+    },
+    {
+      state: "Lost Their Trust",
+      text: "How much do you trust the decisions being made around you at work?",
+      options: [
+        "I trust the people and decisions around me. I feel confident in the direction we are heading.",
+        "I have some doubts, but overall I still feel supported and informed.",
+        "I feel left out of decisions that affect me. My trust is wearing thin.",
+        "I have lost confidence in the decisions being made around me."
+      ]
+    }
+  ];
+
+  const results = {
+    "Thriving": {
+      label: "Thriving",
+      description: "You are doing well. Genuinely well.\n\nThe work feels meaningful. You are the best version of yourself right now and it shows.\n\nYou are operating at your highest level. Your energy is an asset to you and the people around you.\n\nTake a moment to name what is working. Write down three things that are making work feel worthwhile right now. Keep that list somewhere you can return to.\n\nIn your next 1:1 share with your manager what keeps you engaged and explore whether you could be stretched further or take on something new.",
+      footer: ""
+    },
+    "Lost Their Spark": {
+      label: "Lost Their Spark",
+      description: "Something has shifted. You are showing up and delivering but the energy that once made work feel meaningful has quietly faded.\n\nThink about the last time work genuinely energised you. What did you have more of then that feels less present now?\n\nTry this: write down three things that used to make you look forward to work. Then write down what has changed.\n\nIf it would help to talk it through, your manager or People Partner is available to you.",
+      footer: ""
+    },
+    "Lost Their Why": {
+      label: "Lost Their Why",
+      description: "You are delivering. But somewhere along the way the reason behind it has faded. The connection between your work and what matters to you personally has become unclear.\n\nReflect on when your work last felt purposeful. Not to the business. To you. That is where this conversation needs to start.\n\nWrite down what originally drew you to this role. Then write down what still holds true and what no longer does. The gap between those two lists is worth a conversation.\n\nIf it would help to talk it through, your manager or People Partner is available to you.",
+      footer: ""
+    },
+    "Lost Their Path": {
+      label: "Lost Their Path",
+      description: "Something about the road ahead feels unclear. Not your ability. Not your effort. But the direction. Where this is going. What comes next. Whether there is still a future here worth building toward.\n\nWhen the path feels uncertain, everything else gets harder. Goals feel distant. Development stalls. The motivation to invest in what comes next quietly fades.\n\nWrite down where you hoped to be by now. Then write down what feels unclear or out of reach. The gap between those two things is worth a real conversation.\n\nIf it would help to talk it through, your manager or People Partner is available to you.",
+      footer: ""
+    },
+    "Lost Their Voice": {
+      label: "Lost Their Voice",
+      description: "Your thoughts are still there. You just are not sharing them as freely as you once did. Something, an experience, a pattern, a room that does not feel safe, has made speaking up feel less worthwhile than it should.\n\nWhen people stop speaking, the people around them lose the thinking they most need to hear.\n\nThink about the last time you held something back. What stopped you? Write it down. You do not have to share it with anyone. Just name it for yourself first.\n\nIf it would help to talk it through, your manager or People Partner is available to you.",
+      footer: ""
+    },
+    "Lost Their People": {
+      label: "Lost Their People",
+      description: "Work has started to feel more transactional than it used to. The connections that once made showing up worthwhile have thinned. You are still there but the sense of genuinely belonging with the people around you has quietly faded.\n\nThis is not weakness. Feeling connected to the people you work with is a real and legitimate need. When it is absent the impact is felt even when it is hard to name.\n\nThink about one person at work you feel genuinely connected to. If no one comes to mind easily, that is important information.\n\nIf it would help to talk it through, your manager or People Partner is available to you.",
+      footer: ""
+    },
+    "Lost Their Balance": {
+      label: "Lost Their Balance",
+      description: "The workload is not sustainable right now. You are consistently giving more than what can be maintained and the impact is building whether you can feel it yet or not.\n\nThis is not about working hard. It is about running on a level that leaves nothing in reserve. No space to think. No room to grow. No capacity to be anything other than reactive.\n\nTry this: write down what you need to start doing to protect your energy, what you need to stop taking on, and what you want to continue because it still works. Bring that list into a conversation with your manager.\n\nIf it would help to talk it through, your manager or People Partner is available to you.",
+      footer: ""
+    },
+    "Lost Their Trust": {
+      label: "Lost Their Trust",
+      description: "Something has happened. A decision that did not sit right. A promise that was not kept. A moment where the organisation showed you something that is hard to unsee.\n\nTrust does not break loudly. It erodes quietly. And once it does, everything else feels different. The same words land differently. The same actions carry a different weight.\n\nThis is the hardest state to recover from without a direct and honest conversation. Not a general one. A specific one about what happened and what needs to change.\n\nYour People Partner is available to you. This conversation is confidential.",
+      footer: ""
+    }
+  };
+
+  let answers = [], currentQuestion = 0;
+
+  function startDiagnostic() {
+    answers = [];
+    currentQuestion = 0;
+    showQuestion(0);
+    showScreen('screen-question');
+  }
+
+  function showQuestion(index) {
+    const q = questions[index];
+    const letters = ['A','B','C','D'];
+    const progress = (index / questions.length) * 100;
+    document.getElementById('progress-fill').style.width = progress + '%';
+    document.getElementById('question-count').textContent = 'Question ' + (index + 1) + ' of ' + questions.length;
+    document.getElementById('question-text').textContent = q.text;
+    const container = document.getElementById('options-container');
+    container.innerHTML = '';
+    q.options.forEach((opt, i) => {
+      const btn = document.createElement('button');
+      btn.className = 'option';
+      btn.innerHTML = '<span class="option-letter">' + letters[i] + '</span><span>' + opt + '</span>';
+      btn.onclick = () => selectAnswer(i);
+      container.appendChild(btn);
+    });
+    document.getElementById('question-text').classList.remove('fade-in');
+    container.classList.remove('fade-in');
+    void document.getElementById('question-text').offsetWidth;
+    document.getElementById('question-text').classList.add('fade-in');
+    container.classList.add('fade-in');
+  }
+
+  function selectAnswer(optionIndex) {
+    document.querySelectorAll('.option').forEach(o => o.classList.remove('selected'));
+    document.querySelectorAll('.option')[optionIndex].classList.add('selected');
+    const score = 4 - optionIndex;
+    answers.push({ state: questions[currentQuestion].state, score: score });
+    setTimeout(() => {
+      currentQuestion++;
+      if (currentQuestion < questions.length) {
+        showQuestion(currentQuestion);
+      } else {
+        showScreen('screen-context');
+      }
+    }, 350);
+  }
+
+  function handleContext(hasPersonalContext) {
+    if (hasPersonalContext) {
+      showScreen('screen-context-result');
+    } else {
+      showResult();
+    }
+  }
+
+  function showResult() {
+    const lowestScore = Math.min(...answers.map(a => a.score));
+    let stateName;
+    if (lowestScore >= 4) {
+      stateName = "Thriving";
+    } else {
+      let lowest = answers[0];
+      answers.forEach(a => { if (a.score < lowest.score) lowest = a; });
+      stateName = lowest.state;
+    }
+    const result = results[stateName];
+    document.getElementById('result-label').textContent = result.label;
+    document.getElementById('result-state').textContent = stateName;
+    document.getElementById('result-description').innerHTML = result.description.replace(/\n\n/g, '<br><br>');
+    document.getElementById('result-footer').textContent = result.footer;
+    showScreen('screen-result');
+  }
+
+  function showScreen(id) {
+    document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+    document.getElementById(id).classList.add('active');
+    window.scrollTo(0, 0);
+  }
+
+  function restart() {
+    answers = [];
+    currentQuestion = 0;
+    showScreen('screen-welcome');
+  }
+</script>
+</body>
+</html>
