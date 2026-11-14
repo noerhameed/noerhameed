@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Does the Person You Admire Know? — Noer (Misbah) Hameed</title>
+<meta name="description" content="In almost every stay interview, people name a colleague they admire. They have almost never told that person.">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --dark:       #0D2B1F;
+  --dark-mid:   #0F2318;
+  --gold:       #D4A843;
+  --gold-light: #E2C070;
+  --sand:       #F0E9D6;
+  --muted:      #6B9478;
+  --text:       #E8E0CF;
+  --border-dim: rgba(212,168,67,0.08);
+  --pad: 1.5rem;
+}
+
+@media(min-width:768px) { :root { --pad: 4rem; } }
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'DM Sans', sans-serif;
+  background: var(--dark);
+  color: var(--text);
+  font-size: 15px;
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+}
+
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 0 var(--pad);
+  height: 62px;
+  background: rgba(13,43,31,0.97);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border-dim);
+}
+
+.nav-logo {
+  font-family: 'Playfair Display', serif;
+  font-size: 0.9rem;
+  color: var(--gold-light);
+  letter-spacing: 0.03em;
+  text-decoration: none;
+}
+
+.nav-back {
+  font-size: 0.68rem;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+  color: var(--muted);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.nav-back:hover { color: var(--gold-light); }
+
+.article-wrap {
+  max-width: 640px;
+  margin: 0 auto;
+  padding: 120px var(--pad) 80px;
+}
+
+.article-meta {
+  margin-bottom: 2.5rem;
+}
+
+.article-tag {
+  font-size: 0.62rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 1rem;
+  display: block;
+}
+
+.article-title {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(1.75rem, 4vw, 2.8rem);
+  font-weight: 700;
+  line-height: 1.15;
+  color: var(--sand);
+  margin-bottom: 1.25rem;
+}
+
+.article-date {
+  font-size: 0.72rem;
+  color: var(--muted);
+  letter-spacing: 0.08em;
+}
+
+.article-divider {
+  border: none;
+  border-top: 1px solid var(--border-dim);
+  margin: 2rem 0;
+}
+
+.article-body p {
+  font-size: 1rem;
+  color: var(--text);
+  font-weight: 300;
+  line-height: 1.95;
+  margin-bottom: 1.5rem;
+}
+
+.article-body p.lead {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.2rem;
+  font-style: italic;
+  color: var(--sand);
+  line-height: 1.75;
+  margin-bottom: 2rem;
+}
+
+.article-body p.pullquote {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.1rem;
+  font-style: italic;
+  color: var(--gold-light);
+  line-height: 1.75;
+  border-left: 2px solid var(--gold);
+  padding-left: 1.5rem;
+  margin: 2rem 0;
+}
+
+.article-body p.closing {
+  font-family: 'Playfair Display', serif;
+  font-size: 1rem;
+  font-style: italic;
+  color: var(--sand);
+  line-height: 1.8;
+  margin-top: 2.5rem;
+}
+
+.article-footer {
+  margin-top: 4rem;
+  padding-top: 2rem;
+  border-top: 1px solid var(--border-dim);
+}
+
+.author-block {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.author-avatar {
+  width: 44px; height: 44px;
+  border-radius: 50%;
+  background: rgba(212,168,67,0.1);
+  border: 1px solid rgba(212,168,67,0.25);
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'Playfair Display', serif;
+  font-size: 1rem;
+  color: var(--gold);
+  font-style: italic;
+  flex-shrink: 0;
+}
+
+.author-name {
+  font-size: 0.85rem;
+  color: var(--sand);
+  font-weight: 500;
+  margin-bottom: 0.2rem;
+}
+
+.author-role {
+  font-size: 0.75rem;
+  color: var(--muted);
+  font-weight: 300;
+}
+
+.newsletter-cta {
+  background: var(--dark-mid);
+  border: 1px solid rgba(212,168,67,0.15);
+  padding: 1.75rem;
+  margin-top: 1rem;
+}
+
+.newsletter-cta h3 {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.1rem;
+  color: var(--sand);
+  font-weight: 400;
+  margin-bottom: 0.6rem;
+}
+
+.newsletter-cta p {
+  font-size: 0.82rem;
+  color: var(--muted);
+  font-weight: 300;
+  line-height: 1.75;
+  margin-bottom: 1.25rem;
+}
+
+.cta-btn {
+  display: inline-block;
+  padding: 0.75rem 1.75rem;
+  background: var(--gold);
+  color: var(--dark);
+  text-decoration: none;
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  transition: background 0.25s;
+}
+
+.cta-btn:hover { background: var(--gold-light); }
+
+footer {
+  padding: 1.25rem var(--pad);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.68rem;
+  color: var(--muted);
+  border-top: 1px solid var(--border-dim);
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+footer a { color: var(--muted); text-decoration: none; transition: color 0.2s; }
+footer a:hover { color: var(--gold-light); }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo">Noer (Misbah) Hameed</a>
+  <a href="index.html#writing" class="nav-back">Back to Writing</a>
+</nav>
+
+<div class="article-wrap">
+
+  <div class="article-meta">
+    <span class="article-tag">Connection · Managers · The 1:1</span>
+    <h1 class="article-title">Does the Person You Admire Know?</h1>
+    <span class="article-date">August 2026 · 3 minute read · First published on LinkedIn</span>
+  </div>
+
+  <hr class="article-divider">
+
+  <div class="article-body">
+
+    <p class="lead">Stay interviews are one of the parts of my job I look forward to. They give me time with people I do not usually get to speak with: someone from a different team, a different office, a path that does not naturally cross mine. So when I sit down with them, I treat it as precious. Full attention. Formal and informal at the same time.</p>
+
+    <p>There is a question I ask in almost every one.</p>
+
+    <p class="pullquote">Who at work do you admire, and why?</p>
+
+    <p>Everyone names someone. Every single time.</p>
+
+    <p>Then I ask a second question. Does that person know?</p>
+
+    <p>The answer is always no.</p>
+
+    <p>When I ask why, the response is almost always the same. I never thought to say it.</p>
+
+    <p>I have been sitting with that. And I think what is underneath it is this: there is no foundational relationship to hold that kind of exchange. It is easy to ask someone what they had for lunch or how their weekend was. Walking up to someone and saying you inspire me has nowhere to land, because we have made admiration at work into a corporate thing. A 360. An appraisal. A nomination cycle.</p>
+
+    <p class="pullquote">We have turned noticing another person into paperwork.</p>
+
+    <p>The room where admiration used to live naturally was the 1:1. But over time, the 1:1 has become task talk. Deliverables. Updates. Blockers. Connection got squeezed out because it feels least urgent and takes the most effort.</p>
+
+    <p>So if you admire a colleague, do not wait for the next 360. And do not walk up and say you inspire me out of nowhere. Say something specific and small instead. Something like: the way you handled that client call last week, I have been thinking about how you kept it steady. Specific lands. Generic feels strange.</p>
+
+    <p>And if you manage people, two small things. Do not cancel the recurring 1:1. Reschedule if you must, but do not delete. And when you are in it, ask how they are before you ask what they are working on.</p>
+
+    <p class="closing">We keep saying AI cannot replace human connection. That is true. And yet I keep hearing people say it offers them more empathy than the humans around them do. Something to think about the next time you are in a 1:1.</p>
+
+    <p style="font-size:0.8rem;opacity:0.7;margin-top:2rem;">Practitioner observation from stay interviews across APAC. First published on LinkedIn, August 2026.</p>
+
+  </div>
+
+  <div class="article-footer">
+    <div class="author-block">
+      <div class="author-avatar">N</div>
+      <div>
+        <div class="author-name">Noer (Misbah) Hameed</div>
+        <div class="author-role">Behavioural Strategist · APAC · IHRP-CP</div>
+      </div>
+    </div>
+
+    <div class="newsletter-cta">
+      <h3>The Quiet Signals</h3>
+      <p>Monthly writing on the hidden psychology of work. Disengagement, leadership behaviour, and the conversations organisations keep missing. Written from six APAC markets.</p>
+      <a href="index.html#newsletter" class="cta-btn">Subscribe Free &#8594;</a>
+    </div>
+  </div>
+
+</div>
+
+<footer>
+  <span>2026 Noer (Misbah) Hameed</span>
+  <a href="https://www.linkedin.com/in/noermisbah-hameedpeoplepartner/" target="_blank">LinkedIn &#8599;</a>
+</footer>
+
+</body>
+</html>

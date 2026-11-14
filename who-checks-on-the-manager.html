@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Who Checks on the Manager? — Noer (Misbah) Hameed</title>
+<meta name="description" content="People do not leave jobs, they leave managers. But what happens to the manager?">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --dark:       #0D2B1F;
+  --dark-mid:   #0F2318;
+  --gold:       #D4A843;
+  --gold-light: #E2C070;
+  --sand:       #F0E9D6;
+  --muted:      #6B9478;
+  --text:       #E8E0CF;
+  --border-dim: rgba(212,168,67,0.08);
+  --pad: 1.5rem;
+}
+
+@media(min-width:768px) { :root { --pad: 4rem; } }
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'DM Sans', sans-serif;
+  background: var(--dark);
+  color: var(--text);
+  font-size: 15px;
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+}
+
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 0 var(--pad);
+  height: 62px;
+  background: rgba(13,43,31,0.97);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border-dim);
+}
+
+.nav-logo {
+  font-family: 'Playfair Display', serif;
+  font-size: 0.9rem;
+  color: var(--gold-light);
+  letter-spacing: 0.03em;
+  text-decoration: none;
+}
+
+.nav-back {
+  font-size: 0.68rem;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+  color: var(--muted);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.nav-back:hover { color: var(--gold-light); }
+
+.article-wrap {
+  max-width: 640px;
+  margin: 0 auto;
+  padding: 120px var(--pad) 80px;
+}
+
+.article-meta {
+  margin-bottom: 2.5rem;
+}
+
+.article-tag {
+  font-size: 0.62rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 1rem;
+  display: block;
+}
+
+.article-title {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(1.75rem, 4vw, 2.8rem);
+  font-weight: 700;
+  line-height: 1.15;
+  color: var(--sand);
+  margin-bottom: 1.25rem;
+}
+
+.article-date {
+  font-size: 0.72rem;
+  color: var(--muted);
+  letter-spacing: 0.08em;
+}
+
+.article-divider {
+  border: none;
+  border-top: 1px solid var(--border-dim);
+  margin: 2rem 0;
+}
+
+.article-body p {
+  font-size: 1rem;
+  color: var(--text);
+  font-weight: 300;
+  line-height: 1.95;
+  margin-bottom: 1.5rem;
+}
+
+.article-body p.lead {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.2rem;
+  font-style: italic;
+  color: var(--sand);
+  line-height: 1.75;
+  margin-bottom: 2rem;
+}
+
+.article-body p.pullquote {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.1rem;
+  font-style: italic;
+  color: var(--gold-light);
+  line-height: 1.75;
+  border-left: 2px solid var(--gold);
+  padding-left: 1.5rem;
+  margin: 2rem 0;
+}
+
+.article-body p.closing {
+  font-family: 'Playfair Display', serif;
+  font-size: 1rem;
+  font-style: italic;
+  color: var(--sand);
+  line-height: 1.8;
+  margin-top: 2.5rem;
+}
+
+.article-footer {
+  margin-top: 4rem;
+  padding-top: 2rem;
+  border-top: 1px solid var(--border-dim);
+}
+
+.author-block {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.author-avatar {
+  width: 44px; height: 44px;
+  border-radius: 50%;
+  background: rgba(212,168,67,0.1);
+  border: 1px solid rgba(212,168,67,0.25);
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'Playfair Display', serif;
+  font-size: 1rem;
+  color: var(--gold);
+  font-style: italic;
+  flex-shrink: 0;
+}
+
+.author-name {
+  font-size: 0.85rem;
+  color: var(--sand);
+  font-weight: 500;
+  margin-bottom: 0.2rem;
+}
+
+.author-role {
+  font-size: 0.75rem;
+  color: var(--muted);
+  font-weight: 300;
+}
+
+.newsletter-cta {
+  background: var(--dark-mid);
+  border: 1px solid rgba(212,168,67,0.15);
+  padding: 1.75rem;
+  margin-top: 1rem;
+}
+
+.newsletter-cta h3 {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.1rem;
+  color: var(--sand);
+  font-weight: 400;
+  margin-bottom: 0.6rem;
+}
+
+.newsletter-cta p {
+  font-size: 0.82rem;
+  color: var(--muted);
+  font-weight: 300;
+  line-height: 1.75;
+  margin-bottom: 1.25rem;
+}
+
+.cta-btn {
+  display: inline-block;
+  padding: 0.75rem 1.75rem;
+  background: var(--gold);
+  color: var(--dark);
+  text-decoration: none;
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  transition: background 0.25s;
+}
+
+.cta-btn:hover { background: var(--gold-light); }
+
+footer {
+  padding: 1.25rem var(--pad);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.68rem;
+  color: var(--muted);
+  border-top: 1px solid var(--border-dim);
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+footer a { color: var(--muted); text-decoration: none; transition: color 0.2s; }
+footer a:hover { color: var(--gold-light); }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo">Noer (Misbah) Hameed</a>
+  <a href="index.html#writing" class="nav-back">Back to Writing</a>
+</nav>
+
+<div class="article-wrap">
+
+  <div class="article-meta">
+    <span class="article-tag">Manager Disengagement · Leadership</span>
+    <h1 class="article-title">Who Checks on the Manager?</h1>
+    <span class="article-date">April 2026 · 2 minute read · First published on LinkedIn</span>
+  </div>
+
+  <hr class="article-divider">
+
+  <div class="article-body">
+
+    <p class="lead">Something I keep seeing across organisations. We say people do not leave jobs, they leave managers. True. But here is what nobody talks about: what happens to the manager?</p>
+
+    <p>The middle manager caught between leadership expectations and team needs. Responsible for everyone's engagement while nobody checks on theirs. Expected to motivate, develop and retain, often without being motivated, developed or retained themselves.</p>
+
+    <p class="pullquote">The most disengaged person in your organisation might be the manager everyone is relying on.</p>
+
+    <p>Here is what I have observed: people do not just disengage. They lose something specific.</p>
+
+    <p>Their spark. Their why. Their place. Their voice. Their people. Their pace. Their balance. Their trust.</p>
+
+    <p>Eight states. Eight root causes. Eight different interventions.</p>
+
+    <p>And managers go through these exact same states. Just quietly. While still showing up.</p>
+
+    <p>You can fake an engagement score. You cannot fake a state of mind. Fake it till you make it only lasts so long.</p>
+
+    <p>That is why I have been building a diagnostic tool. Not just for employees. For managers too. Because you cannot pour from an empty cup, and right now a lot of cups are empty.</p>
+
+    <p class="closing">Whether you manage people or not: what is your engagement score? And more importantly, what is the actual state of your mind?</p>
+
+    <p style="font-size:0.8rem;opacity:0.7;margin-top:2rem;">Practitioner observation. The eight states are a working framework in development, not a validated instrument. First published on LinkedIn, April 2026.</p>
+
+  </div>
+
+  <div class="article-footer">
+    <div class="author-block">
+      <div class="author-avatar">N</div>
+      <div>
+        <div class="author-name">Noer (Misbah) Hameed</div>
+        <div class="author-role">Behavioural Strategist · APAC · IHRP-CP</div>
+      </div>
+    </div>
+
+    <div class="newsletter-cta">
+      <h3>The Quiet Signals</h3>
+      <p>Monthly writing on the hidden psychology of work. Disengagement, leadership behaviour, and the conversations organisations keep missing. Written from six APAC markets.</p>
+      <a href="index.html#newsletter" class="cta-btn">Subscribe Free &#8594;</a>
+    </div>
+  </div>
+
+</div>
+
+<footer>
+  <span>2026 Noer (Misbah) Hameed</span>
+  <a href="https://www.linkedin.com/in/noermisbah-hameedpeoplepartner/" target="_blank">LinkedIn &#8599;</a>
+</footer>
+
+</body>
+</html>
