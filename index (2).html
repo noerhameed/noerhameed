@@ -1,0 +1,888 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Noer (Misbah) Hameed — Behavioural Strategist, APAC</title>
+<meta name="description" content="Behaviour × People × AI. Better decisions about people and work. Noer (Misbah) Hameed, APAC People Partner and behavioural strategist.">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --dark:       #0D2B1F;
+  --dark-mid:   #0F2318;
+  --gold:       #D4A843;
+  --gold-light: #E2C070;
+  --sand:       #F0E9D6;
+  --muted:      #6B9478;
+  --text:       #E8E0CF;
+  --border:     rgba(212,168,67,0.15);
+  --border-dim: rgba(212,168,67,0.08);
+  --pad: 1.5rem;
+}
+
+@media(min-width:768px) { :root { --pad: 4rem; } }
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'DM Sans', sans-serif;
+  background: var(--dark);
+  color: var(--text);
+  font-size: 15px;
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+  width: 100%;
+}
+
+/* NAV */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 0 var(--pad);
+  height: 62px;
+  background: rgba(13,43,31,0.97);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border-dim);
+}
+
+.nav-logo {
+  font-family: 'Playfair Display', serif;
+  font-size: 0.9rem;
+  color: var(--gold-light);
+  letter-spacing: 0.03em;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.nav-links {
+  list-style: none;
+  display: flex;
+  gap: 1.75rem;
+  align-items: center;
+}
+
+.nav-links a {
+  text-decoration: none;
+  font-size: 0.68rem;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+  color: var(--muted);
+  transition: color 0.2s;
+  white-space: nowrap;
+}
+
+.nav-links a:hover { color: var(--gold-light); }
+
+.nav-links li.hide-mobile { display: none; }
+@media(min-width:640px) { .nav-links li.hide-mobile { display: block; } }
+
+.nav-cta {
+  padding: 0.45rem 1.1rem !important;
+  border: 1px solid var(--border) !important;
+  color: var(--gold) !important;
+}
+
+.nav-cta:hover {
+  background: var(--gold) !important;
+  color: var(--dark) !important;
+}
+
+/* HERO */
+.hero {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 100px var(--pad) 60px;
+  border-bottom: 1px solid var(--border-dim);
+}
+
+.hero-tag {
+  font-size: 0.65rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 1.5rem;
+}
+
+.hero h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(1.6rem, 5vw, 4.2rem);
+  font-weight: 700;
+  line-height: 1.15;
+  color: var(--sand);
+  max-width: 700px;
+  margin-bottom: 1.25rem;
+  word-wrap: break-word;
+}
+
+.hero h1 em {
+  font-style: italic;
+  color: var(--gold-light);
+}
+
+.hero-sub {
+  font-size: 0.9rem;
+  color: var(--muted);
+  max-width: 480px;
+  font-weight: 300;
+  line-height: 1.75;
+  margin-bottom: 2.25rem;
+}
+
+.hero-btn {
+  display: inline-block;
+  padding: 0.85rem 2rem;
+  background: var(--gold);
+  color: var(--dark);
+  text-decoration: none;
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  transition: background 0.25s, transform 0.2s;
+  align-self: flex-start;
+}
+
+.hero-btn:hover { background: var(--gold-light); transform: translateY(-2px); }
+
+.hero-markets {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 3.5rem;
+}
+
+.market {
+  font-size: 0.6rem;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+  color: var(--muted);
+  border: 1px solid rgba(212,168,67,0.18);
+  padding: 0.28rem 0.7rem;
+}
+
+/* SECTIONS */
+.section {
+  padding: 4.5rem var(--pad);
+  border-bottom: 1px solid var(--border-dim);
+}
+
+.section-alt { background: var(--dark-mid); }
+
+.label {
+  font-size: 0.6rem;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 2rem;
+  display: block;
+}
+
+/* ABOUT */
+.about-wrap { max-width: 720px; }
+
+.about-lead {
+  font-family: 'Playfair Display', serif;
+  font-size: 1rem;
+  font-style: italic;
+  color: var(--sand);
+  line-height: 1.65;
+  margin-bottom: 1.25rem;
+}
+
+.about-body p {
+  font-size: 0.875rem;
+  color: var(--text);
+  font-weight: 300;
+  line-height: 1.8;
+  margin-bottom: 0.85rem;
+}
+
+.about-stats {
+  display: flex;
+  gap: 2rem;
+  margin-top: 2rem;
+  padding-top: 2rem;
+  border-top: 1px solid var(--border-dim);
+  flex-wrap: wrap;
+}
+
+.stat-num {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.75rem;
+  color: var(--gold);
+  line-height: 1;
+  margin-bottom: 0.25rem;
+}
+
+.stat-label {
+  font-size: 0.62rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+/* FOCUS */
+.focus-grid { max-width: 820px; }
+
+.focus-item {
+  display: grid;
+  grid-template-columns: 2.25rem 1fr;
+  gap: 1rem;
+  padding: 1.75rem 0;
+  border-bottom: 1px solid var(--border-dim);
+}
+
+.focus-item:first-child { border-top: 1px solid var(--border-dim); }
+
+.focus-num {
+  font-family: 'Playfair Display', serif;
+  font-size: 0.75rem;
+  font-style: italic;
+  color: var(--gold);
+  padding-top: 0.15rem;
+}
+
+.focus-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 0.95rem;
+  color: var(--sand);
+  font-weight: 400;
+  margin-bottom: 0.4rem;
+  line-height: 1.4;
+}
+
+.focus-body {
+  font-size: 0.82rem;
+  color: var(--muted);
+  font-weight: 300;
+  line-height: 1.75;
+}
+
+/* TOOLS */
+.tools-intro {
+  font-size: 0.875rem;
+  color: var(--muted);
+  max-width: 720px;
+  font-weight: 300;
+  line-height: 1.8;
+  margin-bottom: 2.25rem;
+}
+
+.tools-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+  max-width: 900px;
+}
+
+@media(min-width:600px) {
+  .tools-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media(min-width:960px) {
+  .tools-grid { grid-template-columns: repeat(3, 1fr); }
+}
+
+.tool-card {
+  border: 1px solid var(--border);
+  padding: 1.5rem;
+  transition: border-color 0.25s;
+  display: flex;
+  flex-direction: column;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  min-width: 0;
+}
+
+.tool-card:hover { border-color: rgba(212,168,67,0.4); }
+
+.tool-badge {
+  font-size: 0.58rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 0.75rem;
+}
+
+.tool-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 0.95rem;
+  color: var(--sand);
+  font-weight: 400;
+  margin-bottom: 0.5rem;
+  line-height: 1.35;
+}
+
+.tool-desc {
+  font-size: 0.8rem;
+  color: var(--muted);
+  font-weight: 300;
+  line-height: 1.75;
+  flex: 1;
+  margin-bottom: 1.25rem;
+}
+
+.tool-action {
+  font-size: 0.68rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--gold);
+  text-decoration: none;
+  transition: opacity 0.2s;
+}
+
+.tool-action:hover { opacity: 0.7; }
+
+.tool-soon {
+  font-size: 0.62rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--muted);
+  border: 1px solid rgba(255,255,255,0.1);
+  padding: 0.22rem 0.65rem;
+  display: inline-block;
+  align-self: flex-start;
+}
+
+/* NEWSLETTER */
+.newsletter-wrap { max-width: 680px; }
+
+.newsletter-wrap h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.6rem;
+  color: var(--sand);
+  font-weight: 400;
+  line-height: 1.3;
+  margin-bottom: 0.85rem;
+}
+
+.newsletter-wrap p {
+  font-size: 0.875rem;
+  color: var(--muted);
+  font-weight: 300;
+  line-height: 1.8;
+  margin-bottom: 1.75rem;
+}
+
+.newsletter-form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  max-width: 380px;
+}
+
+@media(min-width:500px) {
+  .newsletter-form { flex-direction: row; gap: 0; }
+}
+
+.newsletter-form input {
+  flex: 1;
+  padding: 0.85rem 1.1rem;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid var(--border);
+  color: var(--text);
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.85rem;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.newsletter-form input::placeholder { color: var(--muted); }
+.newsletter-form input:focus { border-color: rgba(212,168,67,0.4); }
+
+.newsletter-form button {
+  padding: 0.85rem 1.4rem;
+  background: var(--gold);
+  color: var(--dark);
+  border: none;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.7rem;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background 0.2s;
+}
+
+.newsletter-form button:hover { background: var(--gold-light); }
+.newsletter-note { font-size: 0.68rem; color: var(--muted); margin-top: 0.65rem; }
+
+/* TESTIMONIALS */
+.testimonial-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.25rem;
+  max-width: 820px;
+}
+
+@media(min-width:640px) {
+  .testimonial-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+.testimonial-card {
+  border: 1px solid var(--border-dim);
+  padding: 1.75rem;
+}
+
+.testimonial-quote {
+  font-family: 'Playfair Display', serif;
+  font-size: 0.95rem;
+  font-style: italic;
+  color: var(--sand);
+  line-height: 1.8;
+  margin-bottom: 1.25rem;
+}
+
+.testimonial-person { display: flex; align-items: center; gap: 0.75rem; }
+
+.t-avatar {
+  width: 36px; height: 36px;
+  border-radius: 50%;
+  background: rgba(212,168,67,0.1);
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'Playfair Display', serif;
+  font-size: 0.75rem;
+  color: var(--gold);
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+.t-name { font-size: 0.82rem; color: var(--sand); font-weight: 500; }
+.t-role { font-size: 0.7rem; color: var(--muted); margin-top: 0.1rem; }
+
+/* CONTACT */
+.contact-wrap { text-align: center; max-width: 480px; margin: 0 auto; }
+
+.contact-wrap h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.8rem;
+  color: var(--sand);
+  font-weight: 400;
+  margin-bottom: 0.85rem;
+  line-height: 1.3;
+}
+
+.contact-wrap p {
+  font-size: 0.875rem;
+  color: var(--muted);
+  font-weight: 300;
+  line-height: 1.8;
+  margin-bottom: 2rem;
+}
+
+.contact-email {
+  font-family: 'Playfair Display', serif;
+  font-style: italic;
+  font-size: 1.1rem;
+  color: var(--gold-light);
+  text-decoration: none;
+  border-bottom: 1px solid rgba(226,192,112,0.3);
+  padding-bottom: 0.15rem;
+  transition: border-color 0.2s;
+}
+
+.contact-email:hover { border-color: var(--gold-light); }
+
+/* FOOTER */
+footer {
+  padding: 1.25rem var(--pad);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.68rem;
+  color: var(--muted);
+  border-top: 1px solid var(--border-dim);
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+footer a { color: var(--muted); text-decoration: none; transition: color 0.2s; }
+footer a:hover { color: var(--gold-light); }
+
+@media (max-width: 640px) {
+  nav { padding: 0 1.25rem; }
+  .nav-links { gap: 1rem; }
+  .hero { padding: 80px 1.25rem 50px; }
+  .section { padding: 3.5rem 1.25rem; }
+  .hero-markets { margin-top: 2.5rem; }
+  .about-wrap { max-width: 100%; }
+  .focus-grid { max-width: 100%; }
+  .focus-item { grid-template-columns: 2rem 1fr; gap: 0.75rem; }
+  .tools-grid { grid-template-columns: 1fr; }
+  .tool-card { padding: 1.25rem; }
+  .newsletter-wrap { max-width: 100%; }
+  .testimonial-grid { grid-template-columns: 1fr; }
+  .contact-wrap { max-width: 100%; }
+  footer { padding: 1.25rem; flex-direction: column; gap: 0.5rem; text-align: center; }
+  .about-stats { gap: 1.5rem; }
+  .hero-btn { padding: 0.85rem 1.5rem; font-size: 0.7rem; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#home" class="nav-logo">Noer (Misbah) Hameed</a>
+  <ul class="nav-links">
+    <li class="hide-mobile"><a href="#about">About</a></li>
+    <li class="hide-mobile"><a href="#focus">Focus</a></li>
+    <li class="hide-mobile"><a href="#tools">Resources</a></li>
+    <li class="hide-mobile"><a href="#products">Products</a></li>
+    <li class="hide-mobile"><a href="#writing">Writing</a></li>
+    <!-- <li class="hide-mobile"><a href="#case-studies">Case Studies</a></li> -->
+    <!-- <li class="hide-mobile"><a href="#books">Books</a></li> -->
+    <!-- <li class="hide-mobile"><a href="#perks">Perks</a></li> -->
+    <li class="hide-mobile"><a href="#newsletter">Newsletter</a></li>
+    <li><a href="#contact" class="nav-cta">Work With Me</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="hero-tag">Behaviour × People × AI · APAC</div>
+  <h1>I help leaders understand what their people are <em>actually saying</em> before it becomes a problem they cannot solve.</h1>
+  <p class="hero-sub">Specialising in disengagement, leadership behaviour, and hidden workplace dynamics across Singapore, Indonesia, India, Malaysia, Thailand and the Philippines. Over a decade in HR. 400+ people. Six culturally distinct markets.</p>
+  <div style="display:flex;gap:1rem;flex-wrap:wrap;margin-bottom:0;">
+    <a href="#contact" class="hero-btn">Work With Me</a>
+    <a href="#tools" class="hero-btn" style="background:transparent;border:1px solid rgba(212,168,67,0.4);color:var(--gold);">Get Free Tools</a>
+  </div>
+  <div class="hero-markets">
+    <span class="market">Singapore</span>
+    <span class="market">Indonesia</span>
+    <span class="market">India</span>
+    <span class="market">Malaysia</span>
+    <span class="market">Thailand</span>
+    <span class="market">Philippines</span>
+  </div>
+  <div style="margin-top:1.5rem;">
+    <a href="https://www.linkedin.com/in/noermisbah-hameedpeoplepartner/" target="_blank" style="font-size:0.72rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted);text-decoration:none;transition:color 0.2s;" onmouseover="this.style.color='var(--gold-light)'" onmouseout="this.style.color='var(--muted)'">Follow on LinkedIn &#8599;</a>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section class="section section-alt" id="about">
+  <div class="label">About</div>
+  <div class="about-wrap">
+    <div style="margin-bottom:2rem;">
+      <img src="noer-hameed.png" alt="Noer (Misbah) Hameed" style="width:280px;height:340px;border-radius:8px;object-fit:cover;object-position:center 10%;border:1px solid rgba(212,168,67,0.25);">
+    </div>
+    <p class="about-lead">My niece Maryam asks why until she truly understands. I am exactly the same way.</p>
+    <div class="about-body">
+      <p>I am Noer (Misbah) Hameed. APAC People Partner and behavioural strategist across six markets. I work on what is hardest to name and easiest to miss: what is actually going on with people, underneath what they show you.</p>
+      <p>Most HR practice works at the surface level. I work underneath it. I ask the next question, then the next, until the real issue surfaces. Not because I always have a solution. Because every leader deserves an accurate picture, and every person deserves to be genuinely heard.</p>
+    </div>
+    <div class="about-stats">
+      <div>
+        <div class="stat-num">10+</div>
+        <div class="stat-label">Years in HR</div>
+      </div>
+      <div>
+        <div class="stat-num">6</div>
+        <div class="stat-label">APAC Markets</div>
+      </div>
+      <div>
+        <div class="stat-num">400+</div>
+        <div class="stat-label">People Supported</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOCUS -->
+<section class="section" id="focus">
+  <div class="label">Focus Areas</div>
+  <div class="focus-grid">
+    <div class="focus-item">
+      <span class="focus-num">01</span>
+      <div>
+        <div class="focus-title">Manager Disengagement</div>
+        <p class="focus-body">A disengaged manager costs more than a disengaged employee because the damage travels downward fast. I help organisations identify when this is happening, understand the root cause, and create conditions for recovery before the team pays the price.</p>
+      </div>
+    </div>
+    <div class="focus-item">
+      <span class="focus-num">02</span>
+      <div>
+        <div class="focus-title">Quiet Resignation. Except It Is Never Quiet.</div>
+        <p class="focus-body">By the time someone resigns, the warning signs have been visible for weeks. A drop in initiative. A change in how they speak in meetings. A withdrawal so gradual it looks like professionalism. I help leaders build the diagnostic literacy to catch these signals before a valued person walks out the door.</p>
+      </div>
+    </div>
+    <div class="focus-item">
+      <span class="focus-num">03</span>
+      <div>
+        <div class="focus-title">The Cost of Busyness</div>
+        <p class="focus-body">When workload consistently takes priority over people, the first thing to disappear is psychological safety. Then trust. Then retention. I work with leadership teams to identify where operational pressure is quietly eroding team health and put practical systems in place before the damage compounds.</p>
+      </div>
+    </div>
+    <div class="focus-item">
+      <span class="focus-num">04</span>
+      <div>
+        <div class="focus-title">Connection, Validation, Purpose</div>
+        <p class="focus-body">These three things sit beneath every retention problem, every disengagement conversation, and every team that stops performing. I help leaders understand where these fundamentals are breaking down in their specific context and build manager capability to restore them systematically.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CASE STUDIES: hidden until filled. To show it, delete style="display:none;" below and un-comment the nav link. -->
+<section class="section" id="case-studies" style="display:none;">
+  <div class="label">Case Studies</div>
+  <p class="tools-intro">Selected work from six APAC markets. Anonymised, with the problem, the approach, and what changed.</p>
+  <div class="tools-grid">
+    <div class="tool-card">
+      <div class="tool-badge">Case Study 01</div>
+      <div class="tool-title">[Title: the problem in one line]</div>
+      <p class="tool-desc"><strong style="color:var(--sand);font-weight:500;">Context.</strong> [Market, team size, what was happening. No company or employee names.]</p>
+      <p class="tool-desc"><strong style="color:var(--sand);font-weight:500;">What I did.</strong> [The diagnosis and the intervention.]</p>
+      <p class="tool-desc"><strong style="color:var(--sand);font-weight:500;">What changed.</strong> [The outcome, with numbers where possible.]</p>
+    </div>
+    <div class="tool-card">
+      <div class="tool-badge">Case Study 02</div>
+      <div class="tool-title">[Title: the problem in one line]</div>
+      <p class="tool-desc"><strong style="color:var(--sand);font-weight:500;">Context.</strong> [Market, team size, what was happening. No company or employee names.]</p>
+      <p class="tool-desc"><strong style="color:var(--sand);font-weight:500;">What I did.</strong> [The diagnosis and the intervention.]</p>
+      <p class="tool-desc"><strong style="color:var(--sand);font-weight:500;">What changed.</strong> [The outcome, with numbers where possible.]</p>
+    </div>
+    <div class="tool-card">
+      <div class="tool-badge">Case Study 03</div>
+      <div class="tool-title">[Title: the problem in one line]</div>
+      <p class="tool-desc"><strong style="color:var(--sand);font-weight:500;">Context.</strong> [Market, team size, what was happening. No company or employee names.]</p>
+      <p class="tool-desc"><strong style="color:var(--sand);font-weight:500;">What I did.</strong> [The diagnosis and the intervention.]</p>
+      <p class="tool-desc"><strong style="color:var(--sand);font-weight:500;">What changed.</strong> [The outcome, with numbers where possible.]</p>
+    </div>
+  </div>
+</section>
+
+<!-- TOOLS -->
+<section class="section section-alt" id="tools">
+  <div class="label">Tools and Templates</div>
+  <p class="tools-intro">Practical resources for leaders and People teams. Built from real conversations, real markets, and years of learning what actually moves the needle.</p>
+  <div class="tools-grid">
+
+    <div class="tool-card">
+      <div class="tool-badge">Free Download</div>
+      <div class="tool-title">Stay Interview Question Guide</div>
+      <p class="tool-desc">Ten questions that get honest answers before someone decides to leave. Built for managers who want to understand what their people actually need, while they still can.</p>
+      <a href="#newsletter" class="tool-action">Get Free via Newsletter &#8594;</a>
+    </div>
+
+    <div class="tool-card">
+      <div class="tool-badge">Free Download</div>
+      <div class="tool-title">Manager One on One Framework</div>
+      <p class="tool-desc">A simple structure for a real conversation, not a status update. Makes people feel heard in 45 minutes. Covers check-in, growth, relationship, and next steps.</p>
+      <a href="Manager_One_on_One_Framework.pdf" class="tool-action" download>Download Free &#8594;</a>
+    </div>
+
+    <div class="tool-card">
+      <div class="tool-badge">Free Download</div>
+      <div class="tool-title">Difficult Conversation Planner</div>
+      <p class="tool-desc">Most hard conversations go badly because of what was not thought through beforehand. This one-page planner helps you walk in clear, honest, and ready.</p>
+      <a href="Difficult_Conversation_Planner.pdf" class="tool-action" download>Download Free &#8594;</a>
+    </div>
+
+    <div class="tool-card">
+      <div class="tool-badge" style="color:#4CAF7D;">Live Now</div>
+      <div class="tool-title">ReviewRight — Rethinking Performance Reviews</div>
+      <p class="tool-desc">A guided, evidence-based review process for managers. Built for written reviews that hold up to calibration, to scrutiny, and to the employee who reads them a year later.</p>
+      <p style="font-size:0.75rem;color:var(--gold);font-style:italic;line-height:1.6;margin-bottom:1rem;">Conceived, designed and built independently, from inside the function.</p>
+      <a href="https://reviewright.noerhameed.com" target="_blank" class="tool-action">Try ReviewRight &#8594;</a>
+      <a href="ReviewRight_Portfolio.pdf" target="_blank" class="tool-action" style="display:block;margin-top:0.6rem;">Product Portfolio (PDF) &#8594;</a>
+    </div>
+
+    <div class="tool-card">
+      <div class="tool-badge">Signature Work</div>
+      <div class="tool-title">People Diagnostic Tool</div>
+      <p class="tool-desc">A structured framework for identifying disengagement before it becomes resignation. Eight states. One facilitated conversation. Built for People Partners who want to get ahead of it.</p>
+      <p style="font-size:0.75rem;color:var(--gold);font-style:italic;line-height:1.6;margin-bottom:1rem;">Built because most organisations only start asking questions after someone resigns. This tool helps you ask them five months earlier.</p>
+      <a href="mailto:hello@noerhameed.com?subject=Diagnostic Tool Waitlist" class="tool-action">Join Waitlist &#8594;</a>
+    </div>
+
+  </div>
+</section>
+
+<!-- NEWSLETTER -->
+<section class="section" id="newsletter">
+  <div class="label">Newsletter</div>
+  <div class="newsletter-wrap">
+    <h2>The Quiet Signals</h2>
+    <p style="font-size:0.78rem;letter-spacing:0.14em;text-transform:uppercase;color:var(--gold);margin-bottom:0.75rem;">The hidden psychology of work</p>
+    <p>5-minute reads on disengagement, leadership behaviour, quiet resignation, and the conversations organisations keep missing. Written from six APAC markets for leaders and HR professionals who want to understand what is actually happening with their people.</p>
+    <p style="font-size:0.85rem;color:var(--sand);font-weight:400;margin-bottom:1.5rem;">Subscribe and receive the Stay Interview Question Guide free.</p>
+    <div style="width:100%;max-width:560px;">
+      <script async src="https://subscribe-forms.beehiiv.com/v3/loader.js" data-beehiiv-form="93094a38-4cb5-43af-858f-1202d428ed12"></script>
+    </div>
+    <p class="newsletter-note" style="margin-top:0.85rem;">Monthly. No spam. Unsubscribe any time.</p>
+  </div>
+</section>
+
+<!-- WRITING -->
+<section class="section" id="writing">
+  <div class="label">Writing</div>
+  <p class="tools-intro">Short reads on the hidden psychology of work. Observations from six markets, written for leaders and HR professionals who want to think more clearly about people.</p>
+  <div style="max-width:680px;">
+    <div style="padding:1.75rem 0;border-bottom:1px solid var(--border-dim);">
+      <div style="font-size:0.6rem;letter-spacing:0.18em;text-transform:uppercase;color:var(--gold);margin-bottom:0.6rem;">August 2026 · 3 minute read</div>
+      <a href="admiration.html" style="text-decoration:none;">
+        <div style="font-family:'Playfair Display',serif;font-size:1rem;color:var(--sand);margin-bottom:0.4rem;font-weight:400;transition:color 0.2s;" onmouseover="this.style.color='var(--gold-light)'" onmouseout="this.style.color='var(--sand)'">Does the Person You Admire Know?</div>
+      </a>
+      <div style="font-size:0.8rem;color:var(--muted);font-weight:300;line-height:1.75;margin-bottom:0.75rem;">In almost every stay interview, people name a colleague they admire. They have almost never told that person. What that says about the 1:1, and what to do instead.</div>
+      <a href="admiration.html" style="font-size:0.68rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--gold);text-decoration:none;">Read Now &#8594;</a>
+    </div>
+    <div style="padding:1.75rem 0;border-bottom:1px solid var(--border-dim);">
+      <div style="font-size:0.6rem;letter-spacing:0.18em;text-transform:uppercase;color:var(--gold);margin-bottom:0.6rem;">June 2026 · 5 minute read</div>
+      <a href="managers-belief.html" style="text-decoration:none;">
+        <div style="font-family:'Playfair Display',serif;font-size:1rem;color:var(--sand);margin-bottom:0.4rem;font-weight:400;transition:color 0.2s;" onmouseover="this.style.color='var(--gold-light)'" onmouseout="this.style.color='var(--sand)'">Your Manager's Belief in You Is a Performance Variable</div>
+      </a>
+      <div style="font-size:0.8rem;color:var(--muted);font-weight:300;line-height:1.75;margin-bottom:0.75rem;">What the Pygmalion effect actually shows about managers and performance, what it does not, and what managers and employees can take from it.</div>
+      <a href="managers-belief.html" style="font-size:0.68rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--gold);text-decoration:none;">Read Now &#8594;</a>
+    </div>
+    <div style="padding:1.75rem 0;border-bottom:1px solid var(--border-dim);">
+      <div style="font-size:0.6rem;letter-spacing:0.18em;text-transform:uppercase;color:var(--gold);margin-bottom:0.6rem;">May 2026 · 4 minute read</div>
+      <a href="quiet-resignation.html" style="text-decoration:none;">
+        <div style="font-family:'Playfair Display',serif;font-size:1rem;color:var(--sand);margin-bottom:0.4rem;font-weight:400;transition:color 0.2s;" onmouseover="this.style.color='var(--gold-light)'" onmouseout="this.style.color='var(--sand)'">Quiet Resignation Is Never Actually Quiet</div>
+      </a>
+      <div style="font-size:0.8rem;color:var(--muted);font-weight:300;line-height:1.75;margin-bottom:0.75rem;">The signals are there weeks before the resignation letter. Most leaders miss them not because they are invisible, but because nobody was asking the right questions.</div>
+      <a href="quiet-resignation.html" style="font-size:0.68rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--gold);text-decoration:none;">Read Now &#8594;</a>
+    </div>
+    <div style="padding:1.75rem 0;border-bottom:1px solid var(--border-dim);">
+      <div style="font-size:0.6rem;letter-spacing:0.18em;text-transform:uppercase;color:var(--gold);margin-bottom:0.6rem;">April 2026 · 2 minute read</div>
+      <a href="who-checks-on-the-manager.html" style="text-decoration:none;">
+        <div style="font-family:'Playfair Display',serif;font-size:1rem;color:var(--sand);margin-bottom:0.4rem;font-weight:400;transition:color 0.2s;" onmouseover="this.style.color='var(--gold-light)'" onmouseout="this.style.color='var(--sand)'">Who Checks on the Manager?</div>
+      </a>
+      <div style="font-size:0.8rem;color:var(--muted);font-weight:300;line-height:1.75;margin-bottom:0.75rem;">People do not leave jobs, they leave managers. But the most disengaged person in your organisation might be the manager everyone is relying on.</div>
+      <a href="who-checks-on-the-manager.html" style="font-size:0.68rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--gold);text-decoration:none;">Read Now &#8594;</a>
+    </div>
+    <div style="padding-top:1.75rem;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem;">
+      <p style="font-size:0.78rem;color:var(--muted);font-weight:300;max-width:400px;">Subscribe to The Quiet Signals to receive each piece directly in your inbox when it drops.</p>
+      <a href="#newsletter" style="font-size:0.72rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--gold);text-decoration:none;">Subscribe &#8594;</a>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="section section-alt" id="testimonials">
+  <div class="label">What Others Say</div>
+  <div class="testimonial-grid">
+    <div class="testimonial-card">
+      <p class="testimonial-quote">"She takes the time to understand her team members, both professionally and personally. Her leadership has not only helped me develop my skills but also feel valued and motivated every day. She leads with both her head and her heart."</p>
+      <div class="testimonial-person">
+        <div class="t-avatar">OA</div>
+        <div>
+          <div class="t-name">Oktaviani Aditia</div>
+          <div class="t-role">People Manager, M+C Saatchi Performance</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- BOOKS - hidden until ready, change display:none to block to activate -->
+<section class="section" id="books" style="display:none;">
+  <div class="label">Reading List</div>
+  <p class="tools-intro">Books that have shaped how I think about people, organisations, and behaviour at work. Recommended because I have read them, not because someone paid me to say so.</p>
+  <div style="max-width:680px;">
+
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:1.25rem;">
+
+      <div style="border:1px solid var(--border);padding:1.5rem;">
+        <div style="font-size:0.58rem;letter-spacing:0.16em;text-transform:uppercase;color:var(--gold);margin-bottom:0.6rem;">Behaviour</div>
+        <div style="font-family:'Playfair Display',serif;font-size:0.95rem;color:var(--sand);margin-bottom:0.3rem;">Drive</div>
+        <div style="font-size:0.78rem;color:var(--muted);margin-bottom:0.75rem;">Daniel Pink</div>
+        <p style="font-size:0.78rem;color:var(--muted);font-weight:300;line-height:1.7;">Why the carrot and stick no longer work and what actually motivates people.</p>
+      </div>
+
+      <div style="border:1px solid var(--border);padding:1.5rem;">
+        <div style="font-size:0.58rem;letter-spacing:0.16em;text-transform:uppercase;color:var(--gold);margin-bottom:0.6rem;">Negotiation</div>
+        <div style="font-family:'Playfair Display',serif;font-size:0.95rem;color:var(--sand);margin-bottom:0.3rem;">Never Split the Difference</div>
+        <div style="font-size:0.78rem;color:var(--muted);margin-bottom:0.75rem;">Chris Voss</div>
+        <p style="font-size:0.78rem;color:var(--muted);font-weight:300;line-height:1.7;">How to have hard conversations and actually get somewhere with them.</p>
+      </div>
+
+      <div style="border:1px solid var(--border);padding:1.5rem;">
+        <div style="font-size:0.58rem;letter-spacing:0.16em;text-transform:uppercase;color:var(--gold);margin-bottom:0.6rem;">Culture</div>
+        <div style="font-family:'Playfair Display',serif;font-size:0.95rem;color:var(--sand);margin-bottom:0.3rem;">The Culture Code</div>
+        <div style="font-size:0.78rem;color:var(--muted);margin-bottom:0.75rem;">Daniel Coyle</div>
+        <p style="font-size:0.78rem;color:var(--muted);font-weight:300;line-height:1.7;">What the best teams in the world do differently and why it is not what you think.</p>
+      </div>
+
+      <div style="border:1px solid var(--border);padding:1.5rem;">
+        <div style="font-size:0.58rem;letter-spacing:0.16em;text-transform:uppercase;color:var(--gold);margin-bottom:0.6rem;">Psychology</div>
+        <div style="font-family:'Playfair Display',serif;font-size:0.95rem;color:var(--sand);margin-bottom:0.3rem;">Behave</div>
+        <div style="font-size:0.78rem;color:var(--muted);margin-bottom:0.75rem;">Robert Sapolsky</div>
+        <p style="font-size:0.78rem;color:var(--muted);font-weight:300;line-height:1.7;">The biology behind why humans do what they do. Dense but worth it.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- PERKS - hidden until ready, change display:none to block to activate -->
+<section class="section section-alt" id="perks" style="display:none;">
+  <div class="label">Perks and Discounts</div>
+  <p class="tools-intro">Tools and platforms I use and genuinely recommend. Where available I have negotiated a discount for my readers.</p>
+  <div class="tools-grid">
+
+    <div class="tool-card">
+      <div class="tool-badge">HR Learning</div>
+      <div class="tool-title">AIHR</div>
+      <p class="tool-desc">The best online HR learning platform I have come across. Practical, evidence-based, and built for practitioners who want to go deeper than most HR courses allow.</p>
+      <span class="tool-soon">Discount Code Coming</span>
+    </div>
+
+    <div class="tool-card">
+      <div class="tool-badge">Add Your Platform</div>
+      <div class="tool-title">Your Recommendation Here</div>
+      <p class="tool-desc">A platform, tool, or resource you genuinely use and would recommend to leaders and HR professionals across APAC.</p>
+      <span class="tool-soon">Coming Soon</span>
+    </div>
+
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="section" id="contact">
+  <div class="label" style="text-align:center;">Work With Me</div>
+  <div class="contact-wrap">
+    <h2>Let us talk about your people.</h2>
+    <p>I work with leaders and HR professionals across APAC who want to understand what is really happening with their people before it becomes a problem they cannot solve.</p>
+    <div style="text-align:left;margin:1.75rem auto;max-width:400px;display:flex;flex-direction:column;gap:1.25rem;">
+
+      <div style="border:1px solid var(--border);padding:1.25rem;">
+        <div style="font-size:0.6rem;letter-spacing:0.16em;text-transform:uppercase;color:var(--gold);margin-bottom:0.5rem;">Available Now</div>
+        <div style="font-size:0.85rem;color:var(--sand);font-weight:500;margin-bottom:0.35rem;">People Strategy Advisory</div>
+        <div style="font-size:0.78rem;color:var(--muted);font-weight:300;line-height:1.7;">For leaders navigating disengagement, retention challenges, or team health issues across APAC markets. Diagnostic conversations, manager enablement, and people strategy support.</div>
+      </div>
+
+      <div style="border:1px solid var(--border);padding:1.25rem;">
+        <div style="font-size:0.6rem;letter-spacing:0.16em;text-transform:uppercase;color:var(--gold);margin-bottom:0.5rem;">Available Now</div>
+        <div style="font-size:0.85rem;color:var(--sand);font-weight:500;margin-bottom:0.35rem;">Writing and Collaboration</div>
+        <div style="font-size:0.78rem;color:var(--muted);font-weight:300;line-height:1.7;">Contributing to HR publications, podcasts, panels, and thought leadership initiatives focused on organisational psychology and people strategy in APAC.</div>
+      </div>
+
+      <div style="border:1px solid var(--border);padding:1.25rem;">
+        <div style="font-size:0.6rem;letter-spacing:0.16em;text-transform:uppercase;color:var(--gold);margin-bottom:0.5rem;">Building Now</div>
+        <div style="font-size:0.85rem;color:var(--sand);font-weight:500;margin-bottom:0.35rem;">Speaking and Workshops</div>
+        <div style="font-size:0.78rem;color:var(--muted);font-weight:300;line-height:1.7;">Available for HR conferences, leadership panels, and team workshops across APAC on disengagement, manager effectiveness, and the hidden psychology of work.</div>
+      </div>
+
+    </div>
+    <p style="font-size:0.8rem;color:var(--muted);margin-bottom:1.5rem;font-weight:300;">Email directly to start a conversation. Response within 48 hours.</p>
+    <a href="mailto:hello@noerhameed.com" class="contact-email">hello@noerhameed.com</a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <span>2026 Noer (Misbah) Hameed</span>
+  <a href="https://www.linkedin.com/in/noermisbah-hameedpeoplepartner/" target="_blank">LinkedIn &#8599;</a>
+</footer>
+
+</body>
+</html>
